@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/apexcharts/dist/apexcharts.css"
+    />
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body>
+    <!--! Navbar -->
+    <nav
+      class="navbar rounded-box shadow lg:max-w-screen-lg mx-auto my-4 border max-w-[90%] border-accent"
+    >
+      <div class="w-full md:flex md:items-center md:gap-2">
+        <div class="flex items-center justify-between">
+          <div class="navbar-start items-center justify-between max-md:w-full">
+            <a href="#" aria-label="Homepage Link">
+              <i class="fa-solid fa-wallet scale-150"></i>
+            </a>
+            <div class="md:hidden">
+              <button
+                type="button"
+                class="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square"
+                data-collapse="#logo-navbar-collapse"
+                aria-controls="logo-navbar-collapse"
+                aria-label="Toggle navigation"
+              >
+                <span
+                  class="icon-[tabler--menu-2] collapse-open:hidden size-4"
+                ></span>
+                <span
+                  class="icon-[tabler--x] collapse-open:block hidden size-4"
+                ></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          id="logo-navbar-collapse"
+          class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full"
+        >
+          <ul class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
+            <li><a href="#">Expenses</a></li>
+            <li><a href="#">Curreny Converter</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--! Navbar !-->
+
+    <!--! Main -->
+
+    <main
+      class="grid grid-cols-2 grid-rows-2 gap-4 mx-auto lg:max-w-screen-lg max-w-[90%] mb-8"
+    >
+      <div
+        class="row-span-2 border h-[700px] flex flex-col justify-between rounded-xl"
+      >
+        <div
+          class="h-[100px] bg-red-50 rounded-xl rounded-b-none flex items-center justify-center relative"
+        >
+          <h1 class="text-3xl text-accent text-center">Expenses</h1>
+          <!--? Date -->
+          <div
+            class="absolute bottom-[-25%] p-2 px-4 flex justify-between gap-4 rounded-lg shadow-md shadow-black backdrop-blur-lg border-accent text-white"
+          >
+            <div class="justify-self-start">
+              <button>
+                <i class="fa-solid fa-caret-left"></i>
+              </button>
+            </div>
+            <p class="cursor-default">02-02-2025</p>
+            <div class="justify-self">
+              <button>
+                <i class="fa-solid fa-caret-right"></i>
+              </button>
+            </div>
+          </div>
+          <!--? Date  -->
+        </div>
+        <!--! Remove border later of the div below -->
+        <div id="expenses" class="h-[560px] rounded-xl rounded-t-none">
+          <div class="flex justify-between items-center p-4 w-[90%] mx-auto">
+            <h2 class="text-xl">Expenses</h2>
+            <button class="btn btn-primary btn-sm" data-modal="#add-expense">
+              Add Expense
+            </button>
+          </div>
+          <div class="overflow-y-auto h-[500px]">
+            <!-- !Imported Table -->
+            <div class="w-[90%] mx-auto rounded-lg pb-2 mt-4">
+              <div class="overflow-x-auto">
+                <table class="table">
+                  <thead>
+                    <tr class="bg-base-300 border-0">
+                      <th class="rounded-s-lg w-[40%]">Name</th>
+                      <th class="w-[20%] text-center">Price</th>
+                      <th class="rounded-e-lg w-[40%] text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--? Tr Component -->
+                    <tr id="expense-component">
+                      <td class="text-nowrap">John Doe</td>
+                      <td class="text-center">300</td>
+                      <td class="flex justify-end">
+                        <button
+                          class="btn btn-circle btn-text btn-sm"
+                          aria-label="Action button"
+                        >
+                          <span class="icon-[tabler--pencil] size-5"></span>
+                        </button>
+                        <button
+                          class="btn btn-circle btn-text btn-sm"
+                          aria-label="Action button"
+                        >
+                          <span class="icon-[tabler--trash] size-5"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- !Imported table end -->
+          </div>
+        </div>
+      </div>
+      <div class="border rounded-xl p-4">
+        <!--! Add chart -->
+        <div id="apex-multiple-area-charts-compare-alt" class="w-full"></div>
+
+        <script>
+          window.addEventListener("load", () => {
+            (function () {
+              buildChart("#apex-multiple-area-charts-compare-alt", (mode) => ({
+                chart: {
+                  height: 400,
+                  type: "area",
+                  toolbar: {
+                    show: false,
+                  },
+                  zoom: {
+                    enabled: false,
+                  },
+                },
+                series: [
+                  {
+                    name: "2024",
+                    data: [
+                      20000, 40000, 60000, 30000, 40000, 100000, 70000, 90000,
+                      70000, 65000, 90000, 100000,
+                    ],
+                  },
+                  {
+                    name: "2023",
+                    data: [
+                      7000, 18000, 20000, 40000, 27000, 50000, 19000, 99000,
+                      32000, 70000, 42000, 50000,
+                    ],
+                  },
+                ],
+                legend: {
+                  show: true,
+                  position: "top",
+                  horizontalAlign: "right",
+                  labels: {
+                    useSeriesColors: true,
+                  },
+                  markers: {
+                    offsetY: 2,
+                  },
+                },
+                dataLabels: {
+                  enabled: false,
+                },
+                stroke: {
+                  curve: "straight",
+                  width: 2,
+                },
+                grid: {
+                  strokeDashArray: 2,
+                  borderColor: "oklch(var(--bc) / 0.4)",
+                },
+                colors: ["oklch(var(--p))", "oklch(var(--in))"],
+                fill: {
+                  gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    gradientToColors: ["oklch(var(--b1))"],
+                    opacityTo: 0.3,
+                    stops: [0, 90, 100],
+                  },
+                },
+                xaxis: {
+                  type: "category",
+                  tickPlacement: "on",
+                  categories: [
+                    "1 January",
+                    "1 February",
+                    "1 March",
+                    "1 April",
+                    "1 May",
+                    "1 June",
+                    "1 July",
+                    "1 August",
+                    "1 September",
+                    "1 October",
+                    "1 November",
+                    "1 December",
+                  ],
+                  axisBorder: {
+                    show: false,
+                  },
+                  axisTicks: {
+                    show: false,
+                  },
+                  crosshairs: {
+                    stroke: {
+                      dashArray: 0,
+                    },
+                    dropShadow: {
+                      show: false,
+                    },
+                  },
+                  tooltip: {
+                    enabled: false,
+                  },
+                  labels: {
+                    style: {
+                      colors: "oklch(var(--bc) / 0.9)",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                    },
+                    formatter: (title) => {
+                      let t = title;
+
+                      if (t) {
+                        const newT = t.split(" ");
+                        t = `${newT[1].slice(0, 3)}`;
+                      }
+
+                      return t;
+                    },
+                  },
+                },
+                yaxis: {
+                  labels: {
+                    align: "left",
+                    minWidth: 0,
+                    maxWidth: 140,
+                    style: {
+                      colors: "oklch(var(--bc) / 0.9)",
+                      fontSize: "12px",
+                      fontWeight: 400,
+                    },
+                    formatter: (value) =>
+                      value >= 1000 ? `${value / 1000}k` : value,
+                  },
+                },
+                tooltip: {
+                  x: {
+                    format: "MMMM yyyy",
+                  },
+                  y: {
+                    formatter: (value) =>
+                      `$${value >= 1000 ? `${value / 1000}k` : value}`,
+                  },
+                  custom: function (props) {
+                    return buildTooltipCompareTwoAlt(props, {
+                      title: "Revenue",
+                      mode,
+                      valuePrefix: "$",
+                      hasTextLabel: true,
+                      wrapperExtClasses: "",
+                      markerExtClasses: "",
+                    });
+                  },
+                },
+                responsive: [
+                  {
+                    breakpoint: 568,
+                    options: {
+                      chart: {
+                        height: 300,
+                      },
+                      labels: {
+                        style: {
+                          colors: "oklch(var(--bc) / 0.9)",
+                          fontSize: "10px",
+                        },
+                        offsetX: -2,
+                        formatter: (title) => title.slice(0, 3),
+                      },
+                      yaxis: {
+                        labels: {
+                          align: "left",
+                          minWidth: 0,
+                          maxWidth: 140,
+                          style: {
+                            colors: "oklch(var(--bc) / 0.9)",
+                            fontSize: "10px",
+                          },
+                          formatter: (value) =>
+                            value >= 1000 ? `${value / 1000}k` : value,
+                        },
+                      },
+                    },
+                  },
+                ],
+              }));
+            })();
+          });
+        </script>
+      </div>
+      <div class="col-start-2 row-start-2 border rounded-xl p-4">4</div>
+    </main>
+
+    <!-- Imports -->
+    <script src="../node_modules/flyonui/flyonui.js"></script>
+    <script src="../node_modules/lodash/lodash.js"></script>
+    <script src="../node_modules/apexcharts/dist/apexcharts.js"></script>
+    <script src="../node_modules/flyonui/dist/js/helper-apexcharts.js"></script>
+  </body>
+</html>
