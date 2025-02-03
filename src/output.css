@@ -2966,22 +2966,6 @@ input:focus-visible {
   color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity, 1)));
 }
 
-.input-floating::-moz-placeholder {
-  color: transparent;
-}
-
-.input-floating::placeholder {
-  color: transparent;
-}
-
-.input-floating:focus::-moz-placeholder {
-  color: var(--fallback-bc,oklch(var(--bc)/0.5));
-}
-
-.input-floating:focus::placeholder {
-  color: var(--fallback-bc,oklch(var(--bc)/0.5));
-}
-
 .input[list]::-webkit-calendar-picker-indicator {
   line-height: 1em;
 }
@@ -3022,92 +3006,6 @@ input:focus-visible {
   color: var(--fallback-bc,oklch(var(--bc)/0.5));
 }
 
-.input-filled-label,
-.input-floating-label {
-  pointer-events: none;
-  position: absolute;
-  inset-inline-start: 0px;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-color: transparent;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.375rem;
-  color: var(--fallback-bc,oklch(var(--bc)/0.8));
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  transition-duration: 150ms;
-}
-
-.peer:focus ~ .input-filled-label,.peer:focus ~ 
-.input-floating-label {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity, 1)));
-}
-
-.peer.input-lg ~ .input-filled-label,.peer.input-lg ~ 
-.input-floating-label {
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-}
-
-.peer.input-sm ~ .input-filled-label,.peer.input-sm ~ 
-.input-floating-label {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.peer.input-lg ~ .input-filled-label {
-  top: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.peer.input-sm ~ .input-filled-label {
-  top: 0.625rem;
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
-}
-
-.peer:not(:-moz-placeholder-shown) ~ .input-filled-label {
-  top: 0.125rem;
-  margin-inline-start: 0.75rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 0px;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.peer:focus ~ .input-filled-label,
-  .peer:focus-within ~ .input-filled-label,
-  .peer:not(:placeholder-shown) ~ .input-filled-label {
-  top: 0.125rem;
-  margin-inline-start: 0.75rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 0px;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.peer.input-lg:not(:-moz-placeholder-shown) ~ .input-filled-label {
-  margin-inline-start: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.peer.input-lg:focus ~ .input-filled-label,
-  .peer.input-lg:focus-within ~ .input-filled-label,
-  .peer.input-lg:not(:placeholder-shown) ~ .input-filled-label {
-  margin-inline-start: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .input.input-filled.input-sm:not(:-moz-placeholder-shown) {
   padding-top: 0.5rem;
 }
@@ -3126,68 +3024,6 @@ input:focus-visible {
   .input.input-filled:not(:placeholder-shown),
   .input.input-filled.input-lg:not(:placeholder-shown) {
   padding-top: 0.75rem;
-}
-
-.input-floating-label {
-  top: 0.5rem;
-}
-
-.peer.input-lg ~ .input-floating-label {
-  top: 0.7rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.peer.input-sm ~ .input-floating-label {
-  top: 0.3rem;
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
-}
-
-.peer:not(:-moz-placeholder-shown) ~ .input-floating-label {
-  top: 0px;
-  margin-inline-start: 0.5rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity, 1)));
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.peer:focus ~ .input-floating-label,
-  .peer:focus-within ~ .input-floating-label,
-  .peer:not(:placeholder-shown) ~ .input-floating-label {
-  top: 0px;
-  margin-inline-start: 0.5rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity, 1)));
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.peer.input-lg:not(:-moz-placeholder-shown) ~ .input-floating-label {
-  margin-inline-start: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.peer.input-lg:focus ~ .input-floating-label,
-  .peer.input-lg:focus-within ~ .input-floating-label,
-  .peer.input-lg:not(:placeholder-shown) ~ .input-floating-label {
-  margin-inline-start: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .input-group {
@@ -5177,76 +5013,6 @@ textarea:focus-visible {
   color: var(--fallback-bc,oklch(var(--bc)/0.5));
 }
 
-.peer:focus ~ .textarea-floating-label,.peer:focus ~ 
-.textarea-filled-label {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity, 1)));
-}
-
-.peer:focus ~ .textarea-floating-label::-moz-placeholder, .peer:focus ~ 
-.textarea-filled-label::-moz-placeholder {
-  color: var(--fallback-bc,oklch(var(--bc)/0.5));
-}
-
-.peer:focus ~ .textarea-floating-label::placeholder,.peer:focus ~ 
-.textarea-filled-label::placeholder {
-  color: var(--fallback-bc,oklch(var(--bc)/0.5));
-}
-
-.peer:not(:-moz-placeholder-shown) ~ .textarea-floating-label {
-  top: 0px;
-  margin-inline-start: 0.75rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity, 1)));
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.peer:focus ~ .textarea-floating-label,
-  .peer:focus-within ~ .textarea-floating-label,
-  .peer:not(:placeholder-shown) ~ .textarea-floating-label {
-  top: 0px;
-  margin-inline-start: 0.75rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity, 1)));
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.peer:not(:-moz-placeholder-shown) ~ .textarea-filled-label {
-  top: 0.25rem;
-  margin-inline-start: 1rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 0px;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.peer:focus ~ .textarea-filled-label,
-  .peer:focus-within ~ .textarea-filled-label,
-  .peer:not(:placeholder-shown) ~ .textarea-filled-label {
-  top: 0.25rem;
-  margin-inline-start: 1rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 0px;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .input-group .textarea {
   border-width: 0px;
 }
@@ -6741,6 +6507,14 @@ span.flatpickr-weekday,
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .block {

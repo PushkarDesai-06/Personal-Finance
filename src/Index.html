@@ -98,47 +98,39 @@
 
             <div id="basic-modal" class="overlay modal overlay-open:opacity-100 max-w-[450px] mx-auto hidden" role="dialog" tabindex="-1">
               <div class="modal-dialog overlay-open:opacity-100">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">Add Expense</h3>
-                    <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Close" data-overlay="#basic-modal" >
-                      <span class="icon-[tabler--x] size-4"></span>
-                    </button>
-                  </div>
-                  <div class="modal-body flex flex-col gap-1">
-                    <form action="">
-                      <!--?Modal Body  -->
+                <form action="" id="addExpensesForm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">Add Expense</h3>
+                      <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Close" data-overlay="#basic-modal" >
+                        <span class="icon-[tabler--x] size-4"></span>
+                      </button>
+                    </div>
+                    <div class="modal-body flex flex-col gap-1">
                       <!--* Name Input  -->
                       <div class="sm:w-96">
-                        <label class="label label-text" for="textareaLabel"> Expense </label>
-                        <textarea class="textarea" placeholder="Describe your expense in short" id="textareaLabel"></textarea>
+                        <label class="label label-text" for="inputName"> Expense </label>
+                        <input type="text"  class="input" placeholder="Describe your expense in short" id="inputName"/>
                       </div>
                       <!--* Name Input  -->
-                      <div class="relative my-4">
-
-                        <!--* Date -->
-                        <!-- <label class="label label-text" for="flatpickr-floating"> Date </label> -->
-                        <input type="text" class="input input-floating peer max-w-sm" placeholder="YYYY-MM-DD" id="flatpickr-floating" />
-                        <label class="input-floating-label" for="flatpickr-floating">Date</label>
-                      </div>
-                      
+                      <!--? Date Input -->
+                      <label for="flatpickr-date" class="mt-3">Date</label>
+                      <input type="text" class="input max-w-sm mb-3" placeholder="YYYY-MM-DD" id="flatpickr-date" aria-required="true"/>
                       <script>
                         window.addEventListener('load', function () {
-                          // floating Type
-                          flatpickr('#flatpickr-floating', {
+                          // Basic
+                          flatpickr('#flatpickr-date', {
                             monthSelectorType: 'static'
                           })
                         })
-                        </script>
-                        <!--* Date -->
-
-
-
+                      </script>
+                      
+                      <!--?END Date Input -->
                       <!--* Amount Input  -->
                       <label class="label label-text" for="number-input-label">Amount:</label>
 
                       <div class="input-group max-w-sm" data-input-number>
-                        <input class="input" id="number-input-label" type="text" value="0" data-input-number-input />
+                        <input class="input" id="number-input-label" type="text" value="0" data-input-number-input required/>
                         <span class="input-group-text gap-3">
                           <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0" aria-label="Decrement button" data-input-number-decrement>
                             <span class="icon-[tabler--minus] size-3.5 flex-shrink-0"></span>
@@ -156,10 +148,10 @@
                       <!--! Close button -->
                       <button type="button" class="btn btn-soft btn-secondary" data-overlay="#basic-modal">Close</button>
                       <!--! Add Expense button -->
-                      <button type="button" class="btn btn-primary" id="addExpensesFinal">Add Expense</button>
+                      <button type="submit" class="btn btn-primary" id="addExpensesFinal">Add Expense</button>
                     </div>
+                  </div> <!-- closing modal-content -->
                 </form>
-                </div>
               </div>
             </div>
 
@@ -169,7 +161,7 @@
             <!--? Imported Table -->
             <div class="w-[90%] mx-auto rounded-lg pb-2 mt-4">
               <div class="overflow-x-auto">
-                <table class="table">
+                <table class="table" id="expensesTable">
                   <thead>
                     <tr class="bg-base-300 border-0">
                       <th class="rounded-s-lg w-[40%]">Name</th>
@@ -179,7 +171,7 @@
                   </thead>
                   <tbody id="tableBody" >
                     <!--? Tr Component -->
-                    <tr id="expense-component">
+                    <tr id="expense-component" data-value="0" >
                       <td class="text-nowrap">Food</td>
                       <td class="text-center">300</td>
                       <td class="flex justify-end">
@@ -192,6 +184,7 @@
                         <button
                           class="btn btn-circle btn-text btn-sm"
                           aria-label="Action button"
+                          onclick="deleteExpense(this)"
                         >
                           <span class="icon-[tabler--trash] size-5"></span>
                         </button>
