@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="../node_modules/apexcharts/dist/apexcharts.css"
     />
+    <link rel="stylesheet" href="../node_modules/flatpickr/dist/flatpickr.css" />
     <link rel="stylesheet" href="output.css" />
   </head>
   <body>
@@ -31,6 +32,7 @@
             <div class="md:hidden">
               <button
                 type="button"
+                i
                 class="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square"
                 data-collapse="#logo-navbar-collapse"
                 aria-controls="logo-navbar-collapse"
@@ -64,9 +66,7 @@
     <main
       class="grid grid-cols-2 grid-rows-2 gap-4 mx-auto lg:max-w-screen-lg max-w-[90%] mb-8"
     >
-      <div
-        class="row-span-2 border h-[700px] flex flex-col justify-between rounded-xl"
-      >
+      <div class="row-span-2 border h-full flex flex-col gap-10 rounded-xl">
         <div
           class="h-[100px] bg-red-50 rounded-xl rounded-b-none flex items-center justify-center relative"
         >
@@ -89,16 +89,84 @@
           </div>
           <!--? Date  -->
         </div>
-        <!--! Remove border later of the div below -->
         <div id="expenses" class="h-[560px] rounded-xl rounded-t-none">
           <div class="flex justify-between items-center p-4 w-[90%] mx-auto">
             <h2 class="text-xl">Expenses</h2>
-            <button class="btn btn-primary btn-sm" data-modal="#add-expense">
+            <button class="btn btn-primary btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="basic-modal" data-overlay="#basic-modal">
               Add Expense
             </button>
+
+            <div id="basic-modal" class="overlay modal overlay-open:opacity-100 max-w-[450px] mx-auto hidden" role="dialog" tabindex="-1">
+              <div class="modal-dialog overlay-open:opacity-100">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">Add Expense</h3>
+                    <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Close" data-overlay="#basic-modal" >
+                      <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                  </div>
+                  <div class="modal-body flex flex-col gap-1">
+                    <form action="">
+                      <!--?Modal Body  -->
+                      <!--* Name Input  -->
+                      <div class="sm:w-96">
+                        <label class="label label-text" for="textareaLabel"> Expense </label>
+                        <textarea class="textarea" placeholder="Describe your expense in short" id="textareaLabel"></textarea>
+                      </div>
+                      <!--* Name Input  -->
+                      <div class="relative my-4">
+
+                        <!--* Date -->
+                        <!-- <label class="label label-text" for="flatpickr-floating"> Date </label> -->
+                        <input type="text" class="input input-floating peer max-w-sm" placeholder="YYYY-MM-DD" id="flatpickr-floating" />
+                        <label class="input-floating-label" for="flatpickr-floating">Date</label>
+                      </div>
+                      
+                      <script>
+                        window.addEventListener('load', function () {
+                          // floating Type
+                          flatpickr('#flatpickr-floating', {
+                            monthSelectorType: 'static'
+                          })
+                        })
+                        </script>
+                        <!--* Date -->
+
+
+
+                      <!--* Amount Input  -->
+                      <label class="label label-text" for="number-input-label">Amount:</label>
+
+                      <div class="input-group max-w-sm" data-input-number>
+                        <input class="input" id="number-input-label" type="text" value="0" data-input-number-input />
+                        <span class="input-group-text gap-3">
+                          <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0" aria-label="Decrement button" data-input-number-decrement>
+                            <span class="icon-[tabler--minus] size-3.5 flex-shrink-0"></span>
+                          </button>
+                          <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0" aria-label="Increment button" data-input-number-increment>
+                            <span class="icon-[tabler--plus] size-3.5 flex-shrink-0"></span>
+                          </button>
+                        </span>
+                      </div>
+                      <!--* Amount Input  -->
+
+                      <!--?Modal Body  -->
+                    </div>
+                    <div class="modal-footer">
+                      <!--! Close button -->
+                      <button type="button" class="btn btn-soft btn-secondary" data-overlay="#basic-modal">Close</button>
+                      <!--! Add Expense button -->
+                      <button type="button" class="btn btn-primary" id="addExpensesFinal">Add Expense</button>
+                    </div>
+                </form>
+                </div>
+              </div>
+            </div>
+
+
           </div>
           <div class="overflow-y-auto h-[500px]">
-            <!-- !Imported Table -->
+            <!--? Imported Table -->
             <div class="w-[90%] mx-auto rounded-lg pb-2 mt-4">
               <div class="overflow-x-auto">
                 <table class="table">
@@ -109,10 +177,10 @@
                       <th class="rounded-e-lg w-[40%] text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tableBody" >
                     <!--? Tr Component -->
                     <tr id="expense-component">
-                      <td class="text-nowrap">John Doe</td>
+                      <td class="text-nowrap">Food</td>
                       <td class="text-center">300</td>
                       <td class="flex justify-end">
                         <button
@@ -137,8 +205,13 @@
           </div>
         </div>
       </div>
-      <div class="border rounded-xl p-4">
+      <div class="border rounded-xl p-4 flex flex-col">
         <!--! Add chart -->
+        <div>
+            <h1 class="text-xl text-center">Your <span class="font text-purple-500" style="font-family: Verdana, Geneva, Tahoma, sans-serif, Tahoma, Geneva, Verdana, sans-serif;">expenses</span></h1>
+          <p class="text-center font-bold">Graphed</p>
+        </div>
+
         <div id="apex-multiple-area-charts-compare-alt" class="w-full"></div>
 
         <script>
@@ -152,7 +225,7 @@
                     show: false,
                   },
                   zoom: {
-                    enabled: false,
+                    enabled: true,
                   },
                 },
                 series: [
@@ -324,13 +397,74 @@
           });
         </script>
       </div>
-      <div class="col-start-2 row-start-2 border rounded-xl p-4">4</div>
+      <div class="col-start-2 row-start-2 border rounded-xl p-4">
+        <!-- !Chatbot -->
+        <div class="flex flex-col h-full relative">
+          <h2 class="text-xl text-center absolute left-1/2 -translate-x-1/2 -translate-y-7 p-2 border-accent border px-4 rounded-lg backdrop-blur-lg">
+            Suggestions
+          </h2>
+          <div id="chat-messages" 
+          class="h-[400px] overflow-y-auto mb-4 overflow-x-hidden text-wrap p-4 border border-accent rounded-xl scrollbar-thin">
+          </div>
+          <div class="mt-auto flex">
+            <input
+              id="chat-input"
+              type="text"
+              placeholder="Type your message..."
+              autocomplete="off"
+              class="flex-1 p-2 border border-accent rounded-l-xl focus:outline-none"
+            />
+            <button
+              id="chat-send"
+              class="p-2 bg-accent text-white rounded-r-xl"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+        <script>
+          const chatMessages = document.getElementById('chat-messages');
+          const chatInput = document.getElementById('chat-input');
+          const chatSend = document.getElementById('chat-send');
+
+          function addMessage(text, sender = 'user') {
+            const messageEl = document.createElement('div');
+            messageEl.className = sender === 'user' ? 'text-right mb-2' : 'text-left mb-2';
+            messageEl.textContent = text;
+            chatMessages.appendChild(messageEl);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }
+
+          function botResponse(userText) {
+            // Gemini chatbot simple simulated response.
+            return `Gemini Chatbot: You said "${userText}"`;
+          }
+
+          chatSend.addEventListener('click', () => {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            addMessage(text, 'user');
+            chatInput.value = '';
+            setTimeout(() => {
+              const reply = botResponse(text);
+              addMessage(reply, 'bot');
+            }, 500);
+          });
+
+          chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') chatSend.click();
+          });
+        </script>
     </main>
 
-    <!-- Imports -->
+    <!--* Script  -->
+    <script src="./script.js"></script>
+
+    <!--* Imports -->
     <script src="../node_modules/flyonui/flyonui.js"></script>
     <script src="../node_modules/lodash/lodash.js"></script>
     <script src="../node_modules/apexcharts/dist/apexcharts.js"></script>
+    <script src="../node_modules/flatpickr/dist/flatpickr.js"></script>
     <script src="../node_modules/flyonui/dist/js/helper-apexcharts.js"></script>
   </body>
 </html>
