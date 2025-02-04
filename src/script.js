@@ -37,15 +37,26 @@ let today = toISOStringWithTimezone(date).split('T')[0]
 const currentMonth = Months[new Date().getMonth()];
 const lastMonth = Months[new Date().getMonth() - 1];
 
-function addTodaysDate() {
+function addDateToData(today) {
     if (!DATA[today]) {
         DATA[today] = [];
         updateLocalStorage();
     }
 }
 
+function addModalDate() {
+    window.addEventListener('load', function () {
+        // Basic
+        flatpickr('#flatpickr-date', {
+            monthSelectorType: 'static'
+        })
+    })
+}
 
-addTodaysDate();
+addModalDate()
+
+
+addDateToData(today);
 generateTable();
 updatechart();
 
@@ -63,6 +74,25 @@ function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(DATA));
 }
 
+//! Handle forward and backward date changes
+
+function changeDateBack() {
+    date.setDate(date.getDate() - 1);
+    today = toISOStringWithTimezone(date).split('T')[0];
+    expensesTodayDate.innerHTML = today;
+    addDateToData(today)
+    generateTable();
+}
+
+function changeDateForward() {
+    date.setDate(date.getDate() + 1);
+    today = toISOStringWithTimezone(date).split('T')[0];
+    expensesTodayDate.innerHTML = today;
+    addDateToData(today)
+    generateTable();
+}
+
+//! Generate table from DATA object
 
 function generateTable() {
     const table = document.querySelector('#expensesTable');
@@ -142,7 +172,10 @@ function deleteExpense(obj) {
     updateLocalStorage();
 }
 
+//! Handle form submission which adds expenses to the table
+
 const expenseForm = document.querySelector('#addExpensesForm');
+
 expenseForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const expenseDescription = document.getElementById('inputName').value;
@@ -164,7 +197,7 @@ expenseForm.addEventListener('submit', function (event) {
     }
     generateTable();
     updateLocalStorage();
-    // Process the form data further as needed.
+    // expenseForm.reset();
 });
 
 
@@ -356,6 +389,7 @@ function updatechart() {
 
 // !END Initialize Chart //
 
+
 const toggleModal = (id) => {
     document.querySelector(`#${id}`).classList.toggle('hidden')
 };
@@ -364,3 +398,5 @@ const toggleModal = (id) => {
 window.editExpense = editExpense;
 window.deleteExpense = deleteExpense;
 window.toggleModal = toggleModal;
+window.changeDateBack = changeDateBack;
+window.changeDateForward = changeDateForward;

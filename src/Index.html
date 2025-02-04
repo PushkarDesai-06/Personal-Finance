@@ -64,9 +64,9 @@
     <!--! Main -->
 
     <main
-      class="grid grid-cols-2 grid-rows-2 gap-4 mx-auto lg:max-w-screen-lg max-w-[90%] mb-8"
+      class="sm:grid sm:grid-cols-2 sm:grid-rows-2 gap-4 mx-auto lg:max-w-screen-lg max-w-[90%] mb-8 grid-cols-1 grid-rows-3 flex flex-col"
     >
-      <div class="row-span-2 border h-full flex flex-col gap-10 rounded-xl">
+      <div class="sm:row-span-2 border sm:h-full sm:w-auto flex flex-col gap-10 rounded-xl">
         <div
           class="h-[100px] bg-red-50 rounded-xl rounded-b-none flex items-center justify-center relative"
         >
@@ -76,14 +76,23 @@
             class="absolute bottom-[-25%] p-2 px-4 flex justify-between gap-4 rounded-lg shadow-md shadow-black backdrop-blur-lg border-accent text-white"
           >
             <div class="justify-self-start">
-              <button>
-                <i class="fa-solid fa-caret-left"></i>
+              <button
+                class="cursor-pointer"
+                id="dateBack"
+                onclick="changeDateBack()"
+              >
+                <i class="fa-solid fa-caret-left transition hover:scale-125"></i>
+                
               </button>
             </div>
             <p class="cursor-default" id="dateToday">0000-00-00</p>
             <div class="justify-self">
-              <button>
-                <i class="fa-solid fa-caret-right"></i>
+              <button
+                class="cursor-pointer"
+                id="dateForward"
+                onclick="changeDateForward()"
+                >
+                <i class="fa-solid fa-caret-right transition hover:scale-125"></i>
               </button>
             </div>
           </div>
@@ -116,15 +125,6 @@
                       <!--? Date Input -->
                       <label for="flatpickr-date" class="mt-3">Date</label>
                       <input type="text" class="input max-w-sm mb-3" placeholder="YYYY-MM-DD" id="flatpickr-date" aria-required="true"/>
-                      <script>
-                        window.addEventListener('load', function () {
-                          // Basic
-                          flatpickr('#flatpickr-date', {
-                            monthSelectorType: 'static'
-                          })
-                        })
-                      </script>
-                      
                       <!--?END Date Input -->
                       <!--* Amount Input  -->
                       <label class="label label-text" for="number-input-label">Amount:</label>
@@ -198,7 +198,7 @@
           </div>
         </div>
       </div>
-      <div class="border rounded-xl p-4 flex flex-col">
+      <div class="border rounded-xl p-4 flex flex-col sm:h-auto h-auto">
         <!--! Add chart -->
         <div>
             <h1 class="text-xl text-center">Your <span class="font text-purple-500" style="font-family: Verdana, Geneva, Tahoma, sans-serif, Tahoma, Geneva, Verdana, sans-serif;">expenses</span></h1>
@@ -209,7 +209,7 @@
 
         
       </div>
-      <div class="col-start-2 row-start-2 border rounded-xl p-4">
+      <div class="sm:col-start-2 col-start-1 sm:row-start-2 border rounded-xl p-4">
         <!-- !Chatbot -->
         <div class="flex flex-col h-full relative">
           <h2 class="text-xl text-center absolute left-1/2 -translate-x-1/2 -translate-y-7 p-2 border-accent border px-4 rounded-lg backdrop-blur-lg">
