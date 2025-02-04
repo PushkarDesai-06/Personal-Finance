@@ -1,3 +1,5 @@
+import { toISOStringWithTimezone } from './isoDateTimeZone.js';
+
 let DATA = {
     // date: [expense objects]
     "2025-02-02": [
@@ -21,6 +23,7 @@ let totalExpenses = {
 
 }
 
+
 const Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
@@ -29,16 +32,25 @@ const addExpensesBtn = document.querySelector('#addExpensesFinal');
 const expensesTodayDate = document.querySelector('#dateToday');
 
 let date = new Date()
-const today = toISOStringWithTimezone(date).split('T')[0]
-console.log(today);
+let today = toISOStringWithTimezone(date).split('T')[0]
+// console.log(today);
 const currentMonth = Months[new Date().getMonth()];
 const lastMonth = Months[new Date().getMonth() - 1];
-// console.log(currentMonth, lastMonth);
 
+function addTodaysDate() {
+    if (!DATA[today]) {
+        DATA[today] = [];
+        updateLocalStorage();
+    }
+}
+
+
+addTodaysDate();
 generateTable();
 updatechart();
+
 expensesTodayDate.innerHTML = today;
-console.log('changed');
+// console.log('changed');
 
 // Load data from localStorage
 const expenses = localStorage.getItem('expenses');
@@ -99,6 +111,7 @@ function editExpense(obj) {
 
         button.classList.toggle("bg-blue-500");
         button.classList.toggle("hover:bg-blue-500");
+        button.classList.toggle("text-white");
 
         descriptionCell.focus();
     } else {
@@ -106,6 +119,7 @@ function editExpense(obj) {
         amountCell.contentEditable = "false";
         button.classList.toggle("bg-blue-500");
         button.classList.toggle("hover:bg-blue-500");
+        button.classList.toggle("text-white");
         // button.style.backgroundColor = "transparent";
 
     }
@@ -116,19 +130,6 @@ function editExpense(obj) {
     // console.log(DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0);
 
     updateLocalStorage();
-
-
-    // Change the click handler to save changes on next click
-    // obj.onclick = function () {
-    //     // Disable editing
-    //     descriptionCell.contentEditable = "false";
-    //     amountCell.contentEditable = "false";
-
-    //     // Update DATA with trimmed text values
-
-    //     obj.onclick = editExpense
-    // };
-
 
 }
 
@@ -147,7 +148,7 @@ expenseForm.addEventListener('submit', function (event) {
     const expenseDescription = document.getElementById('inputName').value;
     const expenseDate = document.getElementById('flatpickr-date').value;
     const expenseAmount = document.getElementById('number-input-label').value;
-    console.log({ expenseDescription, expenseDate, expenseAmount });
+    // console.log({ expenseDescription, expenseDate, expenseAmount });
 
     // Add expense to DATA
     if (DATA[expenseDate]) {
@@ -355,31 +356,11 @@ function updatechart() {
 
 // !END Initialize Chart //
 
-
-
 const toggleModal = (id) => {
     document.querySelector(`#${id}`).classList.toggle('hidden')
 };
 
-
-
-// Functions for the modal
-
-// Pad a number to 2 digits
-function pad(n) { return `${Math.floor(Math.abs(n))}`.padStart(2, '0'); }
-// Get timezone offset in ISO format (+hh:mm or -hh:mm)
-function getTimezoneOffset(date) {
-    const tzOffset = -date.getTimezoneOffset();
-    const diff = tzOffset >= 0 ? '+' : '-';
-    return diff + pad(tzOffset / 60) + ':' + pad(tzOffset % 60);
-};
-
-function toISOStringWithTimezone(date) {
-    return date.getFullYear() +
-        '-' + pad(date.getMonth() + 1) +
-        '-' + pad(date.getDate()) +
-        'T' + pad(date.getHours()) +
-        ':' + pad(date.getMinutes()) +
-        ':' + pad(date.getSeconds()) +
-        getTimezoneOffset(date);
-};
+// Expose module functions to the global scope for inline event handlers
+window.editExpense = editExpense;
+window.deleteExpense = deleteExpense;
+window.toggleModal = toggleModal;
