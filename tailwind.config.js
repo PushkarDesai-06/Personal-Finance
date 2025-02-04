@@ -13,7 +13,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        accent: '#7F6EA0'
+        accent: '#7F6EA0',
+        mainText: '#B8B6C0',
       }
     },
   },
