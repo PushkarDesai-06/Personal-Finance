@@ -21,10 +21,18 @@
     />
     <link rel="stylesheet" href="output.css" />
   </head>
-  <body>
+  <body
+    style="
+      background-image: url(../Assets/CurrencyBg2.jpg);
+      height: 100vh;
+      background-size: auto;
+      background-position: center;
+    "
+  >
     <!--! Navbar -->
+    <div class="h-4"></div>
     <nav
-      class="navbar rounded-box shadow lg:max-w-screen-lg mx-auto my-4 border max-w-[90%] border-accent"
+      class="navbar bg-transparent backdrop-blur-lg rounded-box shadow lg:max-w-screen-lg mx-auto mb-4 border max-w-[90%] border-accent"
     >
       <div class="w-full md:flex md:items-center md:gap-2">
         <div class="flex items-center justify-between">
@@ -55,7 +63,9 @@
           id="logo-navbar-collapse"
           class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full"
         >
-          <ul class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
+          <ul
+            class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2 bg-transparent"
+          >
             <li><a href="./Index.html">Expenses</a></li>
             <li><a href="./CurrencyConverter.html">Curreny Converter</a></li>
           </ul>
@@ -66,12 +76,12 @@
 
     <!-- <h1 class="text-2xl mb-6 text-center">Currency Converter</h1> -->
     <p
-      class="bg-gradient-to-r from-primary to-error bg-clip-text text-transparent font-black text-4xl w-fit mx-auto my-6 p-2"
+      class="bg-gradient-to-r from-primary to-error bg-clip-text text-transparent font-black text-4xl w-fit mx-auto my-6 p-2 text-center relative z-50"
     >
       Currency Converter
     </p>
     <div
-      class="md:max-w-sm w-[90%] mx-auto p-6 border-accent border rounded-md shadow-md"
+      class="md:max-w-sm w-[90%] mx-auto p-6 border-accent border rounded-md shadow-md backdrop-blur-lg"
     >
       <form id="converterForm" class="flex flex-col gap-4">
         <div>
@@ -82,9 +92,9 @@
             >Amount:</label
           >
 
-          <div class="input-group max-w-sm" data-input-number>
+          <div class="input-group max-w-sm bg-transparent" data-input-number>
             <input
-              class="input"
+              class="input border"
               id="number-input-label"
               type="text"
               value="0"
@@ -122,10 +132,10 @@
           /> -->
         </div>
         <div>
-          <label for="fromCurrency" class="block text-gray-700">From</label>
+          <label for="fromCurrency" class="block text-gray-400">From</label>
           <select
             id="fromCurrency"
-            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-transparent"
             required
           >
             <option value="">Select currency</option>
@@ -141,10 +151,10 @@
           </select>
         </div>
         <div>
-          <label for="toCurrency" class="block text-gray-700">To</label>
+          <label for="toCurrency" class="block text-gray-400">To</label>
           <select
             id="toCurrency"
-            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-transparent mb-8"
             required
           >
             <option value="">Select currency</option>
@@ -161,7 +171,7 @@
         </div>
         <button
           type="submit"
-          class="border text-mainText px-4 py-2 rounded-md text-white hover:bg-green-700 transition duration-200"
+          class="border px-4 py-2 rounded-md text-white hover:bg-green-700 transition duration-200 backdrop-blur-lg hover:border-none"
         >
           Convert
         </button>
