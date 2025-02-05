@@ -56,10 +56,6 @@ function addModalDate() {
 addModalDate()
 
 
-addDateToData(today);
-generateTable();
-updatechart();
-
 expensesTodayDate.innerHTML = today;
 // console.log('changed');
 
@@ -73,6 +69,10 @@ if (expenses) {
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(DATA));
 }
+
+addDateToData(today);
+generateTable();
+updatechart();
 
 //! Handle forward and backward date changes
 
