@@ -20,9 +20,8 @@ let DATA = {
 // updateLocalStorage();
 
 let totalExpenses = {
-
+    // date: total amount
 }
-
 
 const Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -55,6 +54,16 @@ function addModalDate() {
 
 addModalDate()
 
+function fillTotalExpenses() {
+    for (const date in DATA) {
+        totalExpenses[date] = DATA[date].reduce((acc, curr) => acc + curr.amount, 0);
+    }
+    // console.log(totalExpenses);
+    updateLocalStorage();
+}
+
+
+
 
 expensesTodayDate.innerHTML = today;
 // console.log('changed');
@@ -68,9 +77,11 @@ if (expenses) {
 
 function updateLocalStorage() {
     localStorage.setItem('expenses', JSON.stringify(DATA));
+    localStorage.setItem('totalExpenses', JSON.stringify(totalExpenses));
 }
 
 addDateToData(today);
+fillTotalExpenses();
 generateTable();
 updatechart();
 
@@ -196,6 +207,7 @@ expenseForm.addEventListener('submit', function (event) {
         }];
     }
     generateTable();
+    fillTotalExpenses();
     updateLocalStorage();
     // expenseForm.reset();
 });
