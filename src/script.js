@@ -83,7 +83,7 @@ function updateLocalStorage() {
 addDateToData(today);
 fillTotalExpenses();
 generateTable();
-updatechart();
+updateChart();
 
 //! Handle forward and backward date changes
 
@@ -215,188 +215,81 @@ expenseForm.addEventListener('submit', function (event) {
 
 //! Initialize Chart //
 
-function updatechart() {
 
-    window.addEventListener("load", () => {
-        (function () {
-            buildChart("#apex-multiple-area-charts-compare-alt", (mode) => ({
-                chart: {
-                    height: 400,
-                    type: "area",
-                    toolbar: {
-                        show: false,
-                    },
-                    zoom: {
-                        enabled: true,
-                    },
-                },
-                series: [
-                    {
-                        name: lastMonth,
-                        data: [
-                            20000, 40000, 60000, 30000, 40000, 100000, 70000, 90000,
-                            70000, 65000, 90000, 100000,
-                        ],
-                    },
-                    {
-                        name: currentMonth,
-                        data: [
-                            7000, 18000, 20000, 40000, 27000, 50000, 19000, 99000,
-                            32000, 70000, 42000, 50000,
-                        ],
-                    },
-                ],
-                legend: {
-                    show: true,
-                    position: "top",
-                    horizontalAlign: "right",
-                    labels: {
-                        useSeriesColors: true,
-                    },
-                    markers: {
-                        offsetY: 2,
-                    },
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                stroke: {
-                    curve: "straight",
-                    width: 2,
-                },
-                grid: {
-                    strokeDashArray: 2,
-                    borderColor: "oklch(var(--bc) / 0.4)",
-                },
-                colors: ["oklch(var(--p))", "oklch(var(--in))"],
-                fill: {
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.7,
-                        gradientToColors: ["oklch(var(--b1))"],
-                        opacityTo: 0.3,
-                        stops: [0, 90, 100],
-                    },
-                },
-                xaxis: {
-                    type: "category",
-                    tickPlacement: "on",
-                    categories: [
-                        "1 January",
-                        "1 February",
-                        "1 March",
-                        "1 April",
-                        "1 May",
-                        "1 June",
-                        "1 July",
-                        "1 August",
-                        "1 September",
-                        "1 October",
-                        "1 November",
-                        "1 December",
-                    ],
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                    crosshairs: {
-                        stroke: {
-                            dashArray: 0,
-                        },
-                        dropShadow: {
-                            show: false,
-                        },
-                    },
-                    tooltip: {
-                        enabled: false,
-                    },
-                    labels: {
-                        style: {
-                            colors: "oklch(var(--bc) / 0.9)",
-                            fontSize: "12px",
-                            fontWeight: 400,
-                        },
-                        formatter: (title) => {
-                            let t = title;
+function generateDayArray() {
+    let days = [];
+    for (let i = 1; i <= 31; i++) {
+        days.push(i);
+    }
+    return days;
+}
 
-                            if (t) {
-                                const newT = t.split(" ");
-                                t = `${newT[1].slice(0, 3)}`;
-                            }
-
-                            return t;
-                        },
-                    },
-                },
-                yaxis: {
-                    labels: {
-                        align: "left",
-                        minWidth: 0,
-                        maxWidth: 140,
-                        style: {
-                            colors: "oklch(var(--bc) / 0.9)",
-                            fontSize: "12px",
-                            fontWeight: 400,
-                        },
-                        formatter: (value) =>
-                            value >= 1000 ? `${value / 1000}k` : value,
-                    },
-                },
-                tooltip: {
-                    x: {
-                        format: "MMMM yyyy",
-                    },
-                    y: {
-                        formatter: (value) =>
-                            `$${value >= 1000 ? `${value / 1000}k` : value}`,
-                    },
-                    custom: function (props) {
-                        return buildTooltipCompareTwoAlt(props, {
-                            title: "Revenue",
-                            mode,
-                            valuePrefix: "$",
-                            hasTextLabel: true,
-                            wrapperExtClasses: "",
-                            markerExtClasses: "",
-                        });
-                    },
-                },
-                responsive: [
-                    {
-                        breakpoint: 568,
-                        options: {
-                            chart: {
-                                height: 300,
-                            },
-                            labels: {
-                                style: {
-                                    colors: "oklch(var(--bc) / 0.9)",
-                                    fontSize: "10px",
-                                },
-                                offsetX: -2,
-                                formatter: (title) => title.slice(0, 3),
-                            },
-                            yaxis: {
-                                labels: {
-                                    align: "left",
-                                    minWidth: 0,
-                                    maxWidth: 140,
-                                    style: {
-                                        colors: "oklch(var(--bc) / 0.9)",
-                                        fontSize: "10px",
-                                    },
-                                    formatter: (value) =>
-                                        value >= 1000 ? `${value / 1000}k` : value,
-                                },
-                            },
-                        },
-                    },
-                ],
-            }));
-        })();
+function generateMonthDataArray(targetMonth, targetYear) {
+    let dayData = new Array(31).fill(0);
+    Object.keys(totalExpenses).forEach(dateStr => {
+        let dateObj = new Date(dateStr);
+        if (dateObj.getMonth() === targetMonth && dateObj.getFullYear() === targetYear) {
+            let day = dateObj.getDate();
+            dayData[day - 1] += totalExpenses[dateStr];
+        }
     });
+    return dayData;
+}
+
+//! Initialize ApexCharts Area Chart
+
+function updateChart() {
+    // Get current date details
+    let currentDate = new Date();
+    let currentMonthIndex = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+
+    // Compute last month details
+    let lastMonthIndex, lastYear;
+    if (currentMonthIndex === 0) {
+        lastMonthIndex = 11;
+        lastYear = currentYear - 1;
+    } else {
+        lastMonthIndex = currentMonthIndex - 1;
+        lastYear = currentYear;
+    }
+
+    // Generate monthly data arrays for current and previous month
+    let currentMonthData = generateMonthDataArray(currentMonthIndex, currentYear);
+    let lastMonthData = generateMonthDataArray(lastMonthIndex, lastYear);
+
+    let options = {
+        chart: {
+            type: 'area'
+        },
+        series: [
+            {
+                name: Months[currentMonthIndex],
+                data: currentMonthData
+            },
+            {
+                name: Months[lastMonthIndex],
+                data: lastMonthData
+            }
+        ],
+        xaxis: {
+            categories: generateDayArray()
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        tooltip: {
+            x: {
+                format: 'dd'
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector('#ApexChartDiv'), options);
+    chart.render();
 }
 
 // !END Initialize Chart //
