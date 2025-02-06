@@ -12,7 +12,7 @@ body::before {
   height: 105%;
   /* scale: 0.5; */
   /* overflow:scroll; */
-  background-image: url("../Assets/blobSideAccent.svg");
+  background-image: url("../Assets/grayBack.svg");
   /* background-size: cover; */
   background-repeat: no-repeat;
   background-attachment: scroll;

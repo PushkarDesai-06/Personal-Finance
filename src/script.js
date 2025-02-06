@@ -181,6 +181,8 @@ function deleteExpense(obj) {
     DATA[date].splice(index, 1);
     generateTable();
     updateLocalStorage();
+    fillTotalExpenses();
+    updateChart();
 }
 
 //! Handle form submission which adds expenses to the table
