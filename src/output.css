@@ -6667,6 +6667,14 @@ span.flatpickr-weekday,
   max-height: 780px;
 }
 
+.max-h-\[1100px\] {
+  max-height: 1100px;
+}
+
+.max-h-\[1020px\] {
+  max-height: 1020px;
+}
+
 .min-h-0 {
   min-height: 0px;
 }
