@@ -4,35 +4,35 @@ This project is a simple personal finance dashboard that allows you to manage an
 
 ## Setup Steps
 
-1. **Clone the Repository**  
+1. **Clone the Repository**
    Clone the project to your local machine:
 
    ```bash
-   git clone https://your-repo-url.git
+   git clone https://github.com/PushkarDesai-06/Personal-Finance.git
    ```
 
-2. **Install Dependencies**  
+2. **Install Dependencies**
    Ensure you have Node.js installed. Then, install the required packages:
 
    ```bash
    npm install
    ```
 
-3. **Install Python Dependencies**  
+3. **Install Python Dependencies**
    Ensure you have Python installed. Then, install the required packages:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Run the Project**  
+4. **Run the Project**
    Open the `Index.html` file from the `src` folder in your browser or start a local development server, for example:
 
    ```bash
    npx live-server src
    ```
 
-5. **Optional: Configure Environment Variables**  
+5. **Optional: Configure Environment Variables**
    Create and configure any necessary environment files (e.g., `.env`) based on your project requirements.
 
 ## Additional Information
