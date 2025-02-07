@@ -163,16 +163,16 @@ function editExpense(obj) {
         button.classList.toggle("text-white");
         // button.style.backgroundColor = "transparent";
 
+        DATA[date][index].description = descriptionCell.innerText.trim();
+        DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0;
+
+
+        updateLocalStorage();
+        fillTotalExpenses();
+        updateChart();
     }
 
-    DATA[date][index].description = descriptionCell.innerText.trim();
-    DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0;
-
     // console.log(DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0);
-
-    updateLocalStorage();
-    fillTotalExpenses();
-    updateChart();
 
 }
 
@@ -323,6 +323,39 @@ function updateChart() {
 }
 
 // !END Initialize Chart //
+
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+
+function addMessage(text, sender = 'user') {
+    const messageEl = document.createElement('div');
+    messageEl.className = sender === 'user' ? 'text-right mb-2' : 'text-left mb-2';
+    messageEl.textContent = text;
+    chatMessages.appendChild(messageEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function botResponse(userText) {
+    // Gemini chatbot simple simulated response.
+    return `Gemini Chatbot: You said "${userText}"`;
+}
+
+chatSend.addEventListener('click', () => {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    chatInput.value = '';
+    setTimeout(() => {
+        const reply = botResponse(text);
+        addMessage(reply, 'bot');
+    }, 500);
+});
+
+chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') chatSend.click();
+});
+
 
 
 const toggleModal = (id) => {

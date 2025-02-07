@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="../node_modules/flatpickr/dist/flatpickr.css" />
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="output.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
   </head>
   <body >
     <!--! Navbar -->
@@ -71,10 +76,10 @@
         <div
           class="h-[100px] border-b border-neutral-800 rounded-xl rounded-b-none flex items-center justify-center relative"
         >
-          <h1 class="text-3xl text-neutral-300 text-center">Expenses</h1>
+          <h1 class="text-3xl text-neutral-300 text-center font-curvy">Expenses</h1>
           <!--? Date -->
           <div
-            class="absolute bottom-[-25%] p-2 px-4 flex justify-between gap-4 rounded-lg shadow-md shadow-black backdrop-blur-lg border-accent text-white"
+            class="absolute bottom-[-25%] p-2 px-4 flex justify-between gap-4 rounded-lg shadow-md shadow-neutral-800 backdrop-blur-lg border-accent text-white"
             id="date-container"
           >
             <div class="justify-self-start">
@@ -100,17 +105,17 @@
           </div>
           <!--? Date  -->
         </div>
-        <div id="expenses" class="h-[560px] rounded-xl rounded-t-none">
+        <div id="expenses" class=" h-[900px] rounded-xl rounded-t-none">
           <div class="flex justify-between items-center p-4 w-[90%] mx-auto">
             <h2 class="text-xl">Expenses</h2>
-            <button class="btn btn-primary btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="basic-modal" data-overlay="#basic-modal">
+            <button class="btn btn-sm bg-neutral-600 bg-opacity-30 px-4 py-2 w-auto h-auto" aria-haspopup="dialog" aria-expanded="false" aria-controls="basic-modal" data-overlay="#basic-modal">
               Add Expense
             </button>
 
             <div id="basic-modal" class="overlay modal overlay-open:opacity-100 max-w-[450px] mx-auto hidden" role="dialog" tabindex="-1">
-              <div class="modal-dialog overlay-open:opacity-100">
+              <div class="modal-dialog overlay-open:opacity-100 ">
                 <form action="" id="addExpensesForm">
-                  <div class="modal-content">
+                  <div class="modal-content bg-neutral-900 bg-opacity-95 border border-neutral-600 rounded-xl backdrop-blur-2xl shadow-xl" id="modal-content">
                     <div class="modal-header">
                       <h3 class="modal-title">Add Expense</h3>
                       <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Close" data-overlay="#basic-modal" >
@@ -120,24 +125,24 @@
                     <div class="modal-body flex flex-col gap-1">
                       <!--* Name Input  -->
                       <div class="sm:w-96">
-                        <label class="label label-text" for="inputName"> Expense </label>
-                        <input type="text"  class="input" placeholder="Describe your expense in short" id="inputName"/>
+                        <label class="label label-text " for="inputName"> Expense </label>
+                        <input type="text "  class="input bg-neutral-800 focus:ring-white" placeholder="Describe your expense in short" id="inputName"/>
                       </div>
                       <!--* Name Input  -->
                       <!--? Date Input -->
                       <label for="flatpickr-date" class="mt-3">Date</label>
-                      <input type="text" class="input max-w-sm mb-3" placeholder="YYYY-MM-DD" id="flatpickr-date" aria-required="true"/>
+                      <input type="text" class="input max-w-sm mb-3 bg-neutral-800 focus:ring-white" placeholder="YYYY-MM-DD" id="flatpickr-date" aria-required="true"/>
                       <!--?END Date Input -->
                       <!--* Amount Input  -->
                       <label class="label label-text" for="number-input-label">Amount:</label>
 
-                      <div class="input-group max-w-sm" data-input-number>
-                        <input class="input" id="number-input-label" type="text" value="0" data-input-number-input required/>
-                        <span class="input-group-text gap-3">
-                          <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0" aria-label="Decrement button" data-input-number-decrement>
+                      <div class="input-group max-w-sm bg-neutral-800 " data-input-number>
+                        <input class="input !focus:border-none" id="number-input-label" type="text" value="0" data-input-number-input required/>
+                        <span class="input-group-text gap-3 bg-neutral-800">
+                          <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0 !bg-neutral-400 !text-black" aria-label="Decrement button" data-input-number-decrement>
                             <span class="icon-[tabler--minus] size-3.5 flex-shrink-0"></span>
                           </button>
-                          <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0" aria-label="Increment button" data-input-number-increment>
+                          <button type="button" class="btn btn-primary btn-soft size-[22px] rounded min-h-0 p-0 !bg-neutral-400 !text-black" aria-label="Increment button" data-input-number-increment>
                             <span class="icon-[tabler--plus] size-3.5 flex-shrink-0"></span>
                           </button>
                         </span>
@@ -150,7 +155,7 @@
                       <!--! Close button -->
                       <button type="button" class="btn btn-soft btn-secondary" data-overlay="#basic-modal">Close</button>
                       <!--! Add Expense button -->
-                      <button type="submit" class="btn btn-primary" id="addExpensesFinal">Add Expense</button>
+                      <button type="submit" class="btn bg-neutral-600 bg-opacity-30 !border-none" id="addExpensesFinal">Add Expense</button>
                     </div>
                   </div> <!-- closing modal-content -->
                 </form>
@@ -159,13 +164,13 @@
 
 
           </div>
-          <div class="overflow-y-auto h-[500px]">
+          <div class="overflow-y-auto h-[835px]">
             <!--? Imported Table -->
             <div class="w-[90%] mx-auto rounded-lg pb-2 mt-4">
               <div class="overflow-x-auto">
                 <table class="table" id="expensesTable">
                   <thead>
-                    <tr class="bg-base-300 border-0">
+                    <tr class="bg-neutral-600 bg-opacity-30 border-0">
                       <th class="rounded-s-lg w-[40%]">Name</th>
                       <th class="w-[20%] text-center">Price</th>
                       <th class="rounded-e-lg w-[40%] text-right">Actions</th>
@@ -174,23 +179,7 @@
                   <tbody id="tableBody" >
                     <!--? Tr Component -->
                     <tr id="expense-component" data-value="0" >
-                      <td class="text-nowrap">Food</td>
-                      <td class="text-center">300</td>
-                      <td class="flex justify-end">
-                        <button
-                          class="btn btn-circle btn-text btn-sm"
-                          aria-label="Action button"
-                        >
-                          <span class="icon-[tabler--pencil] size-5"></span>
-                        </button>
-                        <button
-                          class="btn btn-circle btn-text btn-sm"
-                          aria-label="Action button"
-                          onclick="deleteExpense(this)"
-                        >
-                          <span class="icon-[tabler--trash] size-5"></span>
-                        </button>
-                      </td>
+                      
                     </tr>
                   </tbody>
                 </table>
@@ -203,8 +192,8 @@
       <div class="border rounded-xl p-4 flex flex-col sm:h-auto h-auto backdrop-brightness-75 border-neutral-600 shadow-xl">
         <!--! Add chart -->
         <div>
-            <h1 class="text-xl text-center">Your <span class="font text-purple-500" style="font-family: Verdana, Geneva, Tahoma, sans-serif, Tahoma, Geneva, Verdana, sans-serif;">expenses</span></h1>
-          <p class="text-center font-bold">Graphed</p>
+            <h1 class="text-xl text-center font-playful">Your <span class="font-curvy text-white">expenses</span></h1>
+          <p class="text-center font-playful text-2xl">Graphed</p>
         </div>
 
         <!-- <div id="apex-multiple-area-charts-compare-alt" class="w-full"></div> -->
@@ -237,39 +226,6 @@
             </button>
           </div>
         </div>
-        <script>
-          const chatMessages = document.getElementById('chat-messages');
-          const chatInput = document.getElementById('chat-input');
-          const chatSend = document.getElementById('chat-send');
-
-          function addMessage(text, sender = 'user') {
-            const messageEl = document.createElement('div');
-            messageEl.className = sender === 'user' ? 'text-right mb-2' : 'text-left mb-2';
-            messageEl.textContent = text;
-            chatMessages.appendChild(messageEl);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-          }
-
-          function botResponse(userText) {
-            // Gemini chatbot simple simulated response.
-            return `Gemini Chatbot: You said "${userText}"`;
-          }
-
-          chatSend.addEventListener('click', () => {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            addMessage(text, 'user');
-            chatInput.value = '';
-            setTimeout(() => {
-              const reply = botResponse(text);
-              addMessage(reply, 'bot');
-            }, 500);
-          });
-
-          chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') chatSend.click();
-          });
-        </script>
     </main>
 
     <!--* Script  -->
