@@ -333,7 +333,7 @@ function updateChart() {
 
 
 async function sendToBackend(message) {
-    const res = await axios.post('/chatbot', { message: message, data: JSON.parse(localStorage.getItem('expenses')) })
+    const res = await axios.post('/Suggestions', { message: message, data: JSON.parse(localStorage.getItem('expenses')) })
 
 }
 
