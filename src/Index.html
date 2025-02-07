@@ -204,23 +204,23 @@
       <div class="sm:col-start-2 col-start-1 sm:row-start-2 border rounded-xl p-4 backdrop-brightness-75 border-neutral-600 shadow-xl">
         <!-- !Chatbot -->
         <div class="flex flex-col h-full relative ">
-          <h2 class="text-xl text-center absolute left-1/2 -translate-x-1/2 -translate-y-7 p-2 border-accent border px-4 rounded-lg bg-gray-900">
+          <h2 class="text-xl text-center absolute left-1/2 -translate-x-1/2 -translate-y-7 p-2 border-neutral-600 border px-4 rounded-lg bg-gray-900">
             Suggestions
           </h2>
           <div id="chat-messages" 
-          class="h-[400px] overflow-y-auto mb-4 overflow-x-hidden text-wrap p-4 border border-accent rounded-xl scrollbar-thin">
+          class="h-[400px] overflow-y-auto mb-4 mt-2 overflow-x-hidden text-wrap p-4  rounded-xl scrollbar-thin">
           </div>
-          <div class="mt-auto flex">
+          <div class="mt-auto flex border-neutral-600 border rounded-xl">
             <input
               id="chat-input"
               type="text"
               placeholder="Type your message..."
               autocomplete="off"
-              class="flex-1 p-2 border border-accent rounded-l-xl focus:outline-none"
+              class="flex-1 p-2 rounded-l-xl focus:outline-white"
             />
             <button
               id="chat-send"
-              class="p-2 bg-accent text-white rounded-r-xl"
+              class="p-2 bg-neutral-600 bg-opacity-30 text-mainText rounded-r-xl"
             >
               Send
             </button>
@@ -238,6 +238,7 @@
     <script src="../node_modules/apexcharts/dist/apexcharts.js"></script>
     <script src="../node_modules/flatpickr/dist/flatpickr.js"></script>
     <script src="../node_modules/flyonui/dist/js/helper-apexcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" referrerpolicy="no-referrer"></script>
     <script src="./script.js" type="module"></script>
   </body>
 </html>

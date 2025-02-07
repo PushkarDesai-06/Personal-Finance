@@ -62,8 +62,8 @@ async def suggest_with_gemini(chat_data: ChatData):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error calling Gemini API: {str(e)}")
 
-    print(response)
-    return {"response": response.text}
+    # print(response)
+    return {"response": response}
 
 
 # prompt = "DATA REQUIRED\n" + str(data_dict) + "\nPrompt\n" + "Give me a summary of my expenses"

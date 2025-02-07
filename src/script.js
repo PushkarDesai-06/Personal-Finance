@@ -1,20 +1,24 @@
 import { toISOStringWithTimezone } from './isoDateTimeZone.js';
 
+axios.baseURL = 'http://localhost:8000'
+
+
 let DATA = {
     // date: [expense objects]
+
     "2025-02-02": [
         { description: "Food", amount: 300, date: "2025-02-02", index: 0 },
         { description: "Transport", amount: 100, date: "2025-02-02", index: 1 },
         { description: "Rent", amount: 1000, date: "2025-02-02", index: 2 },
-        // ... other expenses for this date ...
+
     ],
     "2025-02-05": [
         { description: "Food", amount: 300, date: "2025-02-03", index: 0 },
         { description: "Transport", amount: 100, date: "2025-02-03", index: 1 },
         { description: "Rent", amount: 1000, date: "2025-02-03", index: 2 },
-        // ... other expenses for this date ...
+
     ],
-    // ... more dates as needed ...
+
 };
 
 // updateLocalStorage();
@@ -324,6 +328,15 @@ function updateChart() {
 
 // !END Initialize Chart //
 
+
+//! START Chatbot //
+
+
+async function sendToBackend(message) {
+    const res = await axios.post('/chatbot', { message: message, data: JSON.parse(localStorage.getItem('expenses')) })
+
+}
+
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
 const chatSend = document.getElementById('chat-send');
@@ -344,12 +357,8 @@ function botResponse(userText) {
 chatSend.addEventListener('click', () => {
     const text = chatInput.value.trim();
     if (!text) return;
-    addMessage(text, 'user');
-    chatInput.value = '';
-    setTimeout(() => {
-        const reply = botResponse(text);
-        addMessage(reply, 'bot');
-    }, 500);
+
+
 });
 
 chatInput.addEventListener('keydown', (e) => {
