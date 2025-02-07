@@ -171,6 +171,8 @@ function editExpense(obj) {
     // console.log(DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0);
 
     updateLocalStorage();
+    fillTotalExpenses();
+    updateChart();
 
 }
 
@@ -211,6 +213,7 @@ expenseForm.addEventListener('submit', function (event) {
     generateTable();
     fillTotalExpenses();
     updateLocalStorage();
+    updateChart();
     // expenseForm.reset();
 });
 
@@ -241,6 +244,9 @@ function generateMonthDataArray(targetMonth, targetYear) {
 //! Initialize ApexCharts Area Chart
 
 function updateChart() {
+
+    document.querySelector('#ApexChartDiv').innerHTML = '';
+
     // Get current date details
     let currentDate = new Date();
     let currentMonthIndex = currentDate.getMonth();
@@ -262,7 +268,24 @@ function updateChart() {
 
     let options = {
         chart: {
-            type: 'area'
+            type: 'area',
+            toolbar: {
+                show: true,
+                tools: {
+                    download: false,
+                    selection: false,
+                    zoom: false,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: false,
+                    reset: true // Only show the reset (home) icon
+                }
+            },
+            height: 400,
+            zoom: {
+                enabled: true,
+                type: 'x'
+            }
         },
         series: [
             {
@@ -275,7 +298,9 @@ function updateChart() {
             }
         ],
         xaxis: {
-            categories: generateDayArray()
+            categories: generateDayArray(),
+            min: 1,
+            max: 10,
         },
         dataLabels: {
             enabled: false
@@ -283,14 +308,17 @@ function updateChart() {
         stroke: {
             curve: 'smooth'
         },
+        grid: {
+            borderColor: 'rgba(255,255,255,0.2)',
+        },
         tooltip: {
             x: {
-                format: 'dd'
+                format: 'dd MMM'
             }
-        }
+        },
     };
 
-    var chart = new ApexCharts(document.querySelector('#ApexChartDiv'), options);
+    let chart = new ApexCharts(document.querySelector('#ApexChartDiv'), options);
     chart.render();
 }
 
