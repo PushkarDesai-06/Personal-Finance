@@ -15,10 +15,11 @@ module.exports = {
       colors: {
         accent: '#7F6EA0',
         mainText: '#B8B6C0',
-        secondary : '#6842DE'
-      },fontFamily: {
-        'curvy' : [ 'Pacifico', 'sans-serif'],
-        'playful' : [ 'Sour Gummy', 'sans-serif'],
+        secondary: '#6842DE'
+      }, fontFamily: {
+        'curvy': ['Pacifico', 'sans-serif'],
+        'playful': ['Sour Gummy', 'sans-serif'],
+        'customThin': ["montserrat", "sans-serif"]
 
       },
     },
