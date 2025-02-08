@@ -7,7 +7,6 @@ logs/
 *.log
 
 # Build and distribution directories
-dist/
 build/
 
 # OS generated files
