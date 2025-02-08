@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, List, Any
 import google.generativeai as genai
 import os
-import json
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,7 +24,7 @@ origins = ['http://localhost:5500', 'http://localhost:5000', 'http://localhost:5
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=['*' , 'http://127.0.0.1:5500'],
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],
@@ -51,9 +50,9 @@ async def chat_with_gemini(chat_data: ChatData):
     return {"response": response.text}
 
 @app.post('/Suggestions')
-async def suggest_with_gemini(chat_data: ChatData):
+async def suggest_with_gemini(chat_data: SuggestionData):
     
-    prompt = "DATA REQUIRED\n" + str(chat_data.data) + "\n Give me a suggestion for my expenses"
+    prompt = "DATA REQUIRED\n" + str(chat_data.data) + "\n Give me a suggestion for my expenses. \n give me the response such that i can add it inside of the innerHTML of the div. Response should be around 55 words."
   
     genai.configure(api_key=api_key)
     try:
@@ -63,7 +62,7 @@ async def suggest_with_gemini(chat_data: ChatData):
         raise HTTPException(status_code=500, detail=f"Error calling Gemini API: {str(e)}")
 
     # print(response)
-    return {"response": response}
+    return {"response": response.text}
 
 
 # prompt = "DATA REQUIRED\n" + str(data_dict) + "\nPrompt\n" + "Give me a summary of my expenses"
