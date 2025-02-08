@@ -29,6 +29,17 @@
 
     <link rel="stylesheet" href="output.css" />
     <link rel="stylesheet" href="../css/CurrencyStylecss.css" />
+    <style>
+      .chatbox__message--bot {
+        float: left;
+        clear: both;
+      }
+      .chatbox__message--human {
+        float: right;
+        clear: both;
+        margin-right: 2rem;
+      }
+    </style>
   </head>
   <body>
     <!--! Navbar -->
@@ -87,32 +98,42 @@
 
       <div class="flex justify-center mb-6">
         <div
-          class="chatbox w-[80%] border rounded-lg border-neutral-600"
+          class="chatbox w-[95%] border rounded-lg border-neutral-600"
           id="chatbox"
         >
           <div
-            class="chatbox__messages min-h-[300px] min-w-full rounded-lg m-4 p-4"
+            class="chatbox__messages min-h-[400px] min-w-full rounded-lg m-4 p-4"
             id="chatbox__messages"
           >
             <div class="chatbox__message chatbox__message--bot">
               <p
-                class="chatbox__message-text w-auto border border-neutral-600 rounded-lg p-4"
+                class="chatbox__message-text w-auto border border-neutral-600 rounded-md p-4"
               >
                 Hi! I'm a chatbot. How can I help you today?
               </p>
             </div>
+            <div class="chatbox__message chatbox__message--human">
+              <p
+                class="chatbox__message-text w-auto border border-neutral-600 rounded-md p-4"
+              >
+                Hello I am a human input
+              </p>
+            </div>
           </div>
           <div
-            class="chatbox__input border border-neutral-600 m-4 rounded-lg min-h-12 flex items-center"
+            class="chatbox__input border border-neutral-600 m-4 rounded-md min-h-12 flex items-center"
           >
             <input
-              class="w-[90%] h-full p-4 text-wrap max-w-full"
+              class="h-full p-4 text-wrap max-w-full flex-1"
               type="text"
               id="chatbox__input"
-              placeholder="Type a message..."
+              placeholder="Feel free to ask doubts about your spendings..."
             />
-            <button id="chatbox__send w-[10%] h-full">
-              <i class="fa-solid w-full fa-paper-plane ml-4 h-full"></i>
+            <button
+              id="chatbox__send"
+              class="w-14 h-full flex items-center justify-center"
+            >
+              <i class="fa-solid w-full fa-paper-plane "></i>
             </button>
           </div>
         </div>
