@@ -1,9 +1,9 @@
 import { toISOStringWithTimezone } from './isoDateTimeZone.js';
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com'
 
 async function temp() {
     try {
-        const res = await axios.post('/Suggestions' , {data : JSON.parse(localStorage.getItem('expenses'))})
+        const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
         console.log(res.data)
     }
     catch (err) {
@@ -32,32 +32,32 @@ let DATA = {
 
     ],
     "2025-01-01": [{ description: "January expense", amount: 137, date: "2025-01-01", index: 0 }],
-    "2025-01-02": [{ description: "January expense", amount: 92,  date: "2025-01-02", index: 0 }],
+    "2025-01-02": [{ description: "January expense", amount: 92, date: "2025-01-02", index: 0 }],
     "2025-01-03": [{ description: "January expense", amount: 156, date: "2025-01-03", index: 0 }],
-    "2025-01-04": [{ description: "January expense", amount: 68,  date: "2025-01-04", index: 0 }],
+    "2025-01-04": [{ description: "January expense", amount: 68, date: "2025-01-04", index: 0 }],
     "2025-01-05": [{ description: "January expense", amount: 180, date: "2025-01-05", index: 0 }],
     "2025-01-06": [{ description: "January expense", amount: 110, date: "2025-01-06", index: 0 }],
     "2025-01-07": [{ description: "January expense", amount: 145, date: "2025-01-07", index: 0 }],
-    "2025-01-08": [{ description: "January expense", amount: 75,  date: "2025-01-08", index: 0 }],
+    "2025-01-08": [{ description: "January expense", amount: 75, date: "2025-01-08", index: 0 }],
     "2025-01-09": [{ description: "January expense", amount: 167, date: "2025-01-09", index: 0 }],
-    "2025-01-10": [{ description: "January expense", amount: 98,  date: "2025-01-10", index: 0 }],
+    "2025-01-10": [{ description: "January expense", amount: 98, date: "2025-01-10", index: 0 }],
     "2025-01-11": [{ description: "January expense", amount: 134, date: "2025-01-11", index: 0 }],
     "2025-01-12": [{ description: "January expense", amount: 153, date: "2025-01-12", index: 0 }],
-    "2025-01-13": [{ description: "January expense", amount: 60,  date: "2025-01-13", index: 0 }],
+    "2025-01-13": [{ description: "January expense", amount: 60, date: "2025-01-13", index: 0 }],
     "2025-01-14": [{ description: "January expense", amount: 120, date: "2025-01-14", index: 0 }],
     "2025-01-15": [{ description: "January expense", amount: 175, date: "2025-01-15", index: 0 }],
     "2025-01-16": [{ description: "January expense", amount: 112, date: "2025-01-16", index: 0 }],
     "2025-01-17": [{ description: "January expense", amount: 133, date: "2025-01-17", index: 0 }],
-    "2025-01-18": [{ description: "January expense", amount: 90,  date: "2025-01-18", index: 0 }],
-    "2025-01-19": [{ description: "January expense", amount: 86,  date: "2025-01-19", index: 0 }],
+    "2025-01-18": [{ description: "January expense", amount: 90, date: "2025-01-18", index: 0 }],
+    "2025-01-19": [{ description: "January expense", amount: 86, date: "2025-01-19", index: 0 }],
     "2025-01-20": [{ description: "January expense", amount: 142, date: "2025-01-20", index: 0 }],
     "2025-01-21": [{ description: "January expense", amount: 188, date: "2025-01-21", index: 0 }],
-    "2025-01-22": [{ description: "January expense", amount: 97,  date: "2025-01-22", index: 0 }],
+    "2025-01-22": [{ description: "January expense", amount: 97, date: "2025-01-22", index: 0 }],
     "2025-01-23": [{ description: "January expense", amount: 128, date: "2025-01-23", index: 0 }],
     "2025-01-24": [{ description: "January expense", amount: 111, date: "2025-01-24", index: 0 }],
     "2025-01-25": [{ description: "January expense", amount: 165, date: "2025-01-25", index: 0 }],
     "2025-01-26": [{ description: "January expense", amount: 150, date: "2025-01-26", index: 0 }],
-    "2025-01-27": [{ description: "January expense", amount: 79,  date: "2025-01-27", index: 0 }],
+    "2025-01-27": [{ description: "January expense", amount: 79, date: "2025-01-27", index: 0 }],
     "2025-01-28": [{ description: "January expense", amount: 139, date: "2025-01-28", index: 0 }],
     "2025-01-29": [{ description: "January expense", amount: 157, date: "2025-01-29", index: 0 }],
     "2025-01-30": [{ description: "January expense", amount: 103, date: "2025-01-30", index: 0 }],
@@ -415,16 +415,16 @@ const chatInput = document.getElementById('chat-input');
 
 
 async function fetchFromBackend(message) {
-    try{
+    try {
 
         const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
         const data = res.data.response;
         console.log(res);
         addMessage(data, 'bot');
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
-        
+
 }
 
 
@@ -432,7 +432,7 @@ async function fetchFromBackend(message) {
 function addMessage(text, sender = 'user') {
     const messageEl = document.createElement('div');
     messageEl.className = sender === 'user' ? 'text-right mb-2' : 'text-left mb-2';
-    messageEl.classList.add('rounded-md', 'p-2' ,'px-4', 'bg-blue-600' , 'bg-opacity-10' , 'border', 'border-neutral-600' , 'border-opacity-50');
+    messageEl.classList.add('rounded-md', 'p-2', 'px-4', 'bg-blue-600', 'bg-opacity-10', 'border', 'border-neutral-600', 'border-opacity-50');
     messageEl.innerHTML = text;
     chatMessages.appendChild(messageEl);
     chatMessages.scrollTop = chatMessages.scrollHeight;
