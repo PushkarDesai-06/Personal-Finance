@@ -71,6 +71,7 @@ async def suggest_with_gemini(chat_data: SuggestionData):
 # response = model.generate_content(prompt)
 # print(response.text)
 
+host = os.getenv("HOST")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=8000)
+    uvicorn.run(app, host=host, port=8000)
