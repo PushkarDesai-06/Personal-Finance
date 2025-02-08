@@ -52,7 +52,7 @@ async def chat_with_gemini(chat_data: ChatData):
 @app.post('/Suggestions')
 async def suggest_with_gemini(chat_data: SuggestionData):
     
-    prompt = "DATA REQUIRED\n" + str(chat_data.data) + "\n Give me a suggestion for my expenses. \n give me the response such that i can add it inside of the innerHTML of the div. Response should be around 55 words."
+    prompt = "DATA REQUIRED\n" + str(chat_data.data) + "\n Give me a suggestion for my expenses. \n give me the response such that i can add it inside of the innerHTML of the div.Dont use markdown only use tags. Dont include the <html> tag. wrap it in a div. Response should be around 60 words."
   
     genai.configure(api_key=api_key)
     try:
