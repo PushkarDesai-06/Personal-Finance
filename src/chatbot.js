@@ -1,27 +1,30 @@
 import { toISOStringWithTimezone } from './isoDateTimeZone.js';
 axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com';
 
+const sendButton = document.getElementById('chatbox__send');
+const chatboxInput = document.getElementById('chatbox__input');
+const chatboxMessages = document.getElementById('chatbox__messages');
+const clearChatToolbarButton = document.getElementById('clear-chat-toolbar');
 // Global variable for chat history
-let chatHistory = JSON.parse(localStorage.getItem('chat_history')) || [];
+let chat = JSON.parse(localStorage.getItem('localChat')) || [];
 
 // Save chat history to localStorage
 function saveChatHistory() {
-    localStorage.setItem('chat_history', JSON.stringify(chatHistory));
+    localStorage.setItem('localChat', JSON.stringify(document.getElementById('chatbox__messages').innerHTML))
 }
 
 // Load and render chat history on page load
 function loadChatHistory() {
-    chatHistory.forEach((msg) => {
-        const msgDiv = document.createElement('div');
-        msgDiv.classList.add('chatbox__message', msg.type === 'bot' ? 'chatbox__message--bot' : 'chatbox__message--human', 'mb-2');
-        msgDiv.innerHTML = msg.content;
-        chatboxMessages.appendChild(msgDiv);
-    });
+    const chatboxMessages = document.getElementById('chatbox__messages');
+    chatboxMessages.innerHTML = chat;
+    chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
 }
 
-const sendButton = document.getElementById('chatbox__send');
-const chatboxInput = document.getElementById('chatbox__input');
-const chatboxMessages = document.getElementById('chatbox__messages');
+
+clearChatToolbarButton.addEventListener('click', () => {
+    saveChatHistory();
+    chatboxMessages.innerHTML = '';
+});
 
 function addHumanMsg(message) {
     const msgDiv = document.createElement('div');
@@ -32,7 +35,7 @@ function addHumanMsg(message) {
     msgDiv.appendChild(msgText);
     chatboxMessages.appendChild(msgDiv);
     // Save human message in history
-    chatHistory.push({ type: 'human', content: msgDiv.innerHTML });
+    // chatHistory.push({ type: 'human', content: msgDiv.innerHTML });
     saveChatHistory();
 }
 
