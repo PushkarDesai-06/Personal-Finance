@@ -1,5 +1,6 @@
 import { toISOStringWithTimezone } from './isoDateTimeZone.js';
-axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com';
+// axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com';
+axios.defaults.baseURL = 'http://localhost:10000';
 
 const sendButton = document.getElementById('chatbox__send');
 const chatboxInput = document.getElementById('chatbox__input');
@@ -59,7 +60,6 @@ async function addMessage(sender, message) {
           <div>${data}</div>`;
         chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
         // Save bot message in history
-        chatHistory.push({ type: 'bot', content: msgDiv.innerHTML });
         saveChatHistory();
         return data;
     } catch (err) {
