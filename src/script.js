@@ -1,6 +1,12 @@
 import { toISOStringWithTimezone } from './isoDateTimeZone.js';
 axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com'
 
+async function InitializeRequest() {
+    const res = await axios.get('/hi')
+}
+
+setInterval(InitializeRequest, 1000 * 60 * 6)
+
 async function temp() {
     try {
         const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
@@ -409,18 +415,12 @@ function updateChart() {
 // !END Initialize Chart //
 
 
-//! START Chatbot //
+//! START Suggestions //
 const chatMessages = document.getElementById('chat-messages');
-const chatInput = document.getElementById('chat-input');
 
-
-async function fetchFromBackend(message) {
+async function fetchFromBackend() {
     try {
-
-        const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
-        const data = res.data.response;
-        console.log(res);
-        addMessage(data, 'bot');
+        await addMessage('bot');
     } catch (err) {
         console.log(err)
     }
@@ -429,13 +429,48 @@ async function fetchFromBackend(message) {
 
 
 
-function addMessage(text, sender = 'user') {
+async function addMessage(sender = 'user') {
     const messageEl = document.createElement('div');
     messageEl.className = sender === 'user' ? 'text-right mb-2' : 'text-left mb-2';
     messageEl.classList.add('rounded-md', 'p-2', 'px-4', 'bg-blue-600', 'bg-opacity-10', 'border', 'border-neutral-600', 'border-opacity-50');
-    messageEl.innerHTML = text;
+    messageEl.innerHTML = `<div class="loader"></div>`;
     chatMessages.appendChild(messageEl);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    try {
+
+        const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
+        const data = res.data.response;
+        let date = new Date()
+        let time = toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[0] + ':' + toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[1]
+        time += ' ' + (parseInt(time.split(':')[0]) >= 12 ? 'PM' : 'AM')
+        messageEl.innerHTML = `<div class="text-mainText opacity-50 text-sm my-2"><span class="bg-neutral-600 bg-opacity-30  rounded-full  p-1 px-4 ">${time}</span>
+        </div>
+         <div>${data}</div>`;
+        chatMessages.appendChild(messageEl);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return data;
+    }
+    catch (err) {
+        console.log(err)
+    }
+    messageEl.remove()
+    throw new Error('Failed to fetch data from backend')
+}
+
+function addMsgToLocalStorage() {
+    let date = new Date()
+    let time = toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[0] + ':' + toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[1]
+    time += ' ' + (parseInt(time.split(':')[0]) >= 12 ? 'PM' : 'AM')
+    let data = {
+        date: toISOStringWithTimezone(date).split('T')[0],
+        time: time,
+        message: 'Hello'
+    }
+    let messages = JSON.parse(localStorage.getItem('messages')) || []
+    messages.push(data)
+    localStorage.setItem('messages', JSON.stringify(messages))
+}
+
+function addMsgFromLocalStorage() {
 }
 
 
