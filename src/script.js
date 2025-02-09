@@ -303,7 +303,6 @@ expenseForm.addEventListener('submit', function (event) {
     fillTotalExpenses();
     updateLocalStorage();
     updateChart();
-    fetchFromBackend()
     // expenseForm.reset();
 });
 
@@ -417,17 +416,22 @@ function updateChart() {
 
 //! START Suggestions //
 const chatMessages = document.getElementById('chat-messages');
+const generateSuggestionBtn = document.querySelector('#generate-suggestion-btn');
+const clearMessages = document.querySelector('#clear-messages');
 
-async function fetchFromBackend() {
+generateSuggestionBtn.addEventListener('click', async function () {
     try {
         await addMessage('bot');
+        addMsgToLocalStorage()
     } catch (err) {
         console.log(err)
     }
+})
 
-}
-
-
+clearMessages.addEventListener('click', function () {
+    chatMessages.innerHTML = '';
+    localStorage.removeItem('htmlInner')
+})
 
 async function addMessage(sender = 'user') {
     const messageEl = document.createElement('div');
@@ -457,21 +461,22 @@ async function addMessage(sender = 'user') {
 }
 
 function addMsgToLocalStorage() {
+    const msg = document.querySelector('#chat-messages')
     let date = new Date()
     let time = toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[0] + ':' + toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[1]
     time += ' ' + (parseInt(time.split(':')[0]) >= 12 ? 'PM' : 'AM')
-    let data = {
-        date: toISOStringWithTimezone(date).split('T')[0],
-        time: time,
-        message: 'Hello'
-    }
-    let messages = JSON.parse(localStorage.getItem('messages')) || []
-    messages.push(data)
-    localStorage.setItem('messages', JSON.stringify(messages))
+    let htmlInner = JSON.parse(localStorage.getItem('htmlInner')) || ""
+    htmlInner = msg.innerHTML
+    localStorage.setItem('htmlInner', JSON.stringify(htmlInner))
 }
 
 function addMsgFromLocalStorage() {
+    const msg = document.querySelector('#chat-messages')
+    let htmlInner = JSON.parse(localStorage.getItem('htmlInner')) || ""
+    msg.innerHTML = htmlInner
 }
+
+addMsgFromLocalStorage()
 
 
 const toggleModal = (id) => {
