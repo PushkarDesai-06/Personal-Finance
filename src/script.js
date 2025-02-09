@@ -97,7 +97,9 @@ function generateTable() {
     const table = document.querySelector('#expensesTable');
     const tbody = table.querySelector('tbody');
     tbody.innerHTML = '';
-
+    if (!DATA[today]) {
+        return;
+    }
     DATA[today].forEach((expense, i) => {
         tbody.innerHTML += `
                 <tr data-date="${today}" data-index="${i}">
