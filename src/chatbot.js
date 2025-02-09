@@ -1,6 +1,14 @@
 import { toISOStringWithTimezone } from './isoDateTimeZone.js';
-// axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com';
-axios.defaults.baseURL = 'http://localhost:10000';
+axios.defaults.baseURL = 'https://personal-finance-3t1h.onrender.com';
+// axios.defaults.baseURL = 'http://localhost:10000';
+
+
+async function InitializeRequest() {
+    const res = await axios.get('/hi')
+}
+
+setInterval(InitializeRequest, 1000 * 60 * 6)
+
 
 const sendButton = document.getElementById('chatbox__send');
 const chatboxInput = document.getElementById('chatbox__input');
@@ -23,8 +31,14 @@ function loadChatHistory() {
 
 
 clearChatToolbarButton.addEventListener('click', () => {
-    saveChatHistory();
-    chatboxMessages.innerHTML = '';
+    if (confirm('Are you sure you want to clear chat history?')) {
+
+        chatboxMessages.innerHTML = '';
+        saveChatHistory();
+
+    }
+
+    return
 });
 
 function addHumanMsg(message) {
