@@ -7,104 +7,10 @@ async function InitializeRequest() {
 
 setInterval(InitializeRequest, 1000 * 60 * 6)
 
-async function temp() {
-    try {
-        const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
-        console.log(res.data)
-    }
-    catch (err) {
-        console.log(err)
-
-    }
-}
-
-// temp()
-
-
-
 let DATA = {
     // date: [expense objects]
-
-    "2025-02-02": [
-        { description: "Food", amount: 300, date: "2025-02-02", index: 0 },
-        { description: "Transport", amount: 100, date: "2025-02-02", index: 1 },
-        { description: "Rent", amount: 1000, date: "2025-02-02", index: 2 },
-
-    ],
-    "2025-02-05": [
-        { description: "Food", amount: 300, date: "2025-02-03", index: 0 },
-        { description: "Transport", amount: 100, date: "2025-02-03", index: 1 },
-        { description: "Rent", amount: 1000, date: "2025-02-03", index: 2 },
-
-    ],
-    "2025-01-01": [{ description: "January expense", amount: 137, date: "2025-01-01", index: 0 }],
-    "2025-01-02": [{ description: "January expense", amount: 92, date: "2025-01-02", index: 0 }],
-    "2025-01-03": [{ description: "January expense", amount: 156, date: "2025-01-03", index: 0 }],
-    "2025-01-04": [{ description: "January expense", amount: 68, date: "2025-01-04", index: 0 }],
-    "2025-01-05": [{ description: "January expense", amount: 180, date: "2025-01-05", index: 0 }],
-    "2025-01-06": [{ description: "January expense", amount: 110, date: "2025-01-06", index: 0 }],
-    "2025-01-07": [{ description: "January expense", amount: 145, date: "2025-01-07", index: 0 }],
-    "2025-01-08": [{ description: "January expense", amount: 75, date: "2025-01-08", index: 0 }],
-    "2025-01-09": [{ description: "January expense", amount: 167, date: "2025-01-09", index: 0 }],
-    "2025-01-10": [{ description: "January expense", amount: 98, date: "2025-01-10", index: 0 }],
-    "2025-01-11": [{ description: "January expense", amount: 134, date: "2025-01-11", index: 0 }],
-    "2025-01-12": [{ description: "January expense", amount: 153, date: "2025-01-12", index: 0 }],
-    "2025-01-13": [{ description: "January expense", amount: 60, date: "2025-01-13", index: 0 }],
-    "2025-01-14": [{ description: "January expense", amount: 120, date: "2025-01-14", index: 0 }],
-    "2025-01-15": [{ description: "January expense", amount: 175, date: "2025-01-15", index: 0 }],
-    "2025-01-16": [{ description: "January expense", amount: 112, date: "2025-01-16", index: 0 }],
-    "2025-01-17": [{ description: "January expense", amount: 133, date: "2025-01-17", index: 0 }],
-    "2025-01-18": [{ description: "January expense", amount: 90, date: "2025-01-18", index: 0 }],
-    "2025-01-19": [{ description: "January expense", amount: 86, date: "2025-01-19", index: 0 }],
-    "2025-01-20": [{ description: "January expense", amount: 142, date: "2025-01-20", index: 0 }],
-    "2025-01-21": [{ description: "January expense", amount: 188, date: "2025-01-21", index: 0 }],
-    "2025-01-22": [{ description: "January expense", amount: 97, date: "2025-01-22", index: 0 }],
-    "2025-01-23": [{ description: "January expense", amount: 128, date: "2025-01-23", index: 0 }],
-    "2025-01-24": [{ description: "January expense", amount: 111, date: "2025-01-24", index: 0 }],
-    "2025-01-25": [{ description: "January expense", amount: 165, date: "2025-01-25", index: 0 }],
-    "2025-01-26": [{ description: "January expense", amount: 150, date: "2025-01-26", index: 0 }],
-    "2025-01-27": [{ description: "January expense", amount: 79, date: "2025-01-27", index: 0 }],
-    "2025-01-28": [{ description: "January expense", amount: 139, date: "2025-01-28", index: 0 }],
-    "2025-01-29": [{ description: "January expense", amount: 157, date: "2025-01-29", index: 0 }],
-    "2025-01-30": [{ description: "January expense", amount: 103, date: "2025-01-30", index: 0 }],
-    "2025-01-31": [{ description: "January expense", amount: 180, date: "2025-01-31", index: 0 }],
-
-
-    "2025-12-01": [{ description: "December expense", amount: 164, date: "2025-12-01", index: 0 }],
-    "2025-12-02": [{ description: "December expense", amount: 178, date: "2025-12-02", index: 0 }],
-    "2025-12-03": [{ description: "December expense", amount: 112, date: "2025-12-03", index: 0 }],
-    "2025-12-04": [{ description: "December expense", amount: 150, date: "2025-12-04", index: 0 }],
-    "2025-12-05": [{ description: "December expense", amount: 145, date: "2025-12-05", index: 0 }],
-    "2025-12-06": [{ description: "December expense", amount: 129, date: "2025-12-06", index: 0 }],
-    "2025-12-07": [{ description: "December expense", amount: 120, date: "2025-12-07", index: 0 }],
-    "2025-12-08": [{ description: "December expense", amount: 185, date: "2025-12-08", index: 0 }],
-    "2025-12-09": [{ description: "December expense", amount: 171, date: "2025-12-09", index: 0 }],
-    "2025-12-10": [{ description: "December expense", amount: 142, date: "2025-12-10", index: 0 }],
-    "2025-12-11": [{ description: "December expense", amount: 110, date: "2025-12-11", index: 0 }],
-    "2025-12-12": [{ description: "December expense", amount: 198, date: "2025-12-12", index: 0 }],
-    "2025-12-13": [{ description: "December expense", amount: 123, date: "2025-12-13", index: 0 }],
-    "2025-12-14": [{ description: "December expense", amount: 159, date: "2025-12-14", index: 0 }],
-    "2025-12-15": [{ description: "December expense", amount: 167, date: "2025-12-15", index: 0 }],
-    "2025-12-16": [{ description: "December expense", amount: 134, date: "2025-12-16", index: 0 }],
-    "2025-12-17": [{ description: "December expense", amount: 190, date: "2025-12-17", index: 0 }],
-    "2025-12-18": [{ description: "December expense", amount: 115, date: "2025-12-18", index: 0 }],
-    "2025-12-19": [{ description: "December expense", amount: 132, date: "2025-12-19", index: 0 }],
-    "2025-12-20": [{ description: "December expense", amount: 149, date: "2025-12-20", index: 0 }],
-    "2025-12-21": [{ description: "December expense", amount: 155, date: "2025-12-21", index: 0 }],
-    "2025-12-22": [{ description: "December expense", amount: 176, date: "2025-12-22", index: 0 }],
-    "2025-12-23": [{ description: "December expense", amount: 180, date: "2025-12-23", index: 0 }],
-    "2025-12-24": [{ description: "December expense", amount: 101, date: "2025-12-24", index: 0 }],
-    "2025-12-25": [{ description: "December expense", amount: 188, date: "2025-12-25", index: 0 }],
-    "2025-12-26": [{ description: "December expense", amount: 157, date: "2025-12-26", index: 0 }],
-    "2025-12-27": [{ description: "December expense", amount: 142, date: "2025-12-27", index: 0 }],
-    "2025-12-28": [{ description: "December expense", amount: 165, date: "2025-12-28", index: 0 }],
-    "2025-12-29": [{ description: "December expense", amount: 134, date: "2025-12-29", index: 0 }],
-    "2025-12-30": [{ description: "December expense", amount: 160, date: "2025-12-30", index: 0 }],
-    "2025-12-31": [{ description: "December expense", amount: 175, date: "2025-12-31", index: 0 }],
 };
 
-
-// updateLocalStorage();
 
 let totalExpenses = {
     // date: total amount
@@ -118,7 +24,6 @@ const expensesTodayDate = document.querySelector('#dateToday');
 let date = new Date()
 let today = toISOStringWithTimezone(date).split('T')[0]
 
-// console.log(today);
 const currentMonth = Months[new Date().getMonth()];
 const lastMonth = Months[new Date().getMonth() - 1];
 
@@ -131,7 +36,6 @@ function addDateToData(today) {
 
 function addModalDate() {
     window.addEventListener('load', function () {
-        // Basic
         flatpickr('#flatpickr-date', {
             monthSelectorType: 'static'
         })
@@ -144,15 +48,10 @@ function fillTotalExpenses() {
     for (const date in DATA) {
         totalExpenses[date] = DATA[date].reduce((acc, curr) => acc + curr.amount, 0);
     }
-    // console.log(totalExpenses);
     updateLocalStorage();
 }
 
-
-
-
 expensesTodayDate.innerHTML = today;
-// console.log('changed');
 
 //! Load data from localStorage
 const expenses = localStorage.getItem('expenses');
@@ -198,7 +97,6 @@ function generateTable() {
     const table = document.querySelector('#expensesTable');
     const tbody = table.querySelector('tbody');
     tbody.innerHTML = '';
-    // Use forEach with index to ensure the index is current
 
     DATA[today].forEach((expense, i) => {
         tbody.innerHTML += `
@@ -219,12 +117,9 @@ function generateTable() {
                 </tr>
             `;
     });
-
 }
 
 function editExpense(obj) {
-
-    // console.log(obj);
     const tr = obj.closest("tr");
     const button = obj.closest("button");
     const date = tr.getAttribute("data-date");
@@ -233,7 +128,7 @@ function editExpense(obj) {
     const descriptionCell = tr.children[1];
     const amountCell = tr.children[2];
 
-    // Enable editing
+    //? Enable editing
     if (descriptionCell.contentEditable !== "true") {
 
         descriptionCell.contentEditable = "true";
@@ -250,19 +145,14 @@ function editExpense(obj) {
         button.classList.toggle("bg-blue-500");
         button.classList.toggle("hover:bg-blue-500");
         button.classList.toggle("text-white");
-        // button.style.backgroundColor = "transparent";
 
         DATA[date][index].description = descriptionCell.innerText.trim();
         DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0;
-
 
         updateLocalStorage();
         fillTotalExpenses();
         updateChart();
     }
-
-    // console.log(DATA[date][index].amount = parseFloat(amountCell.innerText.trim()) || 0);
-
 }
 
 function deleteExpense(obj) {
@@ -285,9 +175,7 @@ expenseForm.addEventListener('submit', function (event) {
     const expenseDescription = document.getElementById('inputName').value;
     const expenseDate = document.getElementById('flatpickr-date').value;
     const expenseAmount = document.getElementById('number-input-label').value;
-    // console.log({ expenseDescription, expenseDate, expenseAmount });
 
-    // Add expense to DATA
     if (DATA[expenseDate]) {
         DATA[expenseDate].push({
             description: expenseDescription,
@@ -303,12 +191,10 @@ expenseForm.addEventListener('submit', function (event) {
     fillTotalExpenses();
     updateLocalStorage();
     updateChart();
-    // expenseForm.reset();
+
 });
 
-
 //! Initialize Chart //
-
 
 function generateDayArray() {
     let days = [];
@@ -333,15 +219,13 @@ function generateMonthDataArray(targetMonth, targetYear) {
 //! Initialize ApexCharts Area Chart
 
 function updateChart() {
-
     document.querySelector('#ApexChartDiv').innerHTML = '';
 
-    // Get current date details
     let currentDate = new Date();
     let currentMonthIndex = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
 
-    // Compute last month details
+    //? Compute last month details
     let lastMonthIndex, lastYear;
     if (currentMonthIndex === 0) {
         lastMonthIndex = 11;
@@ -351,7 +235,7 @@ function updateChart() {
         lastYear = currentYear;
     }
 
-    // Generate monthly data arrays for current and previous month
+    //? Generate monthly data arrays for current and previous month
     let currentMonthData = generateMonthDataArray(currentMonthIndex, currentYear);
     let lastMonthData = generateMonthDataArray(lastMonthIndex, lastYear);
 
@@ -367,7 +251,7 @@ function updateChart() {
                     zoomin: true,
                     zoomout: true,
                     pan: false,
-                    reset: true // Only show the reset (home) icon
+                    reset: true //? Only show the reset (home) icon
                 }
             },
             height: 400,
@@ -410,9 +294,7 @@ function updateChart() {
     let chart = new ApexCharts(document.querySelector('#ApexChartDiv'), options);
     chart.render();
 }
-
 // !END Initialize Chart //
-
 
 //! START Suggestions //
 const chatMessages = document.getElementById('chat-messages');
@@ -483,12 +365,10 @@ function addMsgFromLocalStorage() {
 
 addMsgFromLocalStorage()
 
-
 const toggleModal = (id) => {
     document.querySelector(`#${id}`).classList.toggle('hidden')
 };
 
-// Expose module functions to the global scope for inline event handlers
 window.editExpense = editExpense;
 window.deleteExpense = deleteExpense;
 window.toggleModal = toggleModal;
