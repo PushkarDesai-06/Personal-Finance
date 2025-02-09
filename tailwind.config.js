@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./src/**/*.{html,js}",
+    "./js/**/*.js",
     "./node_modules/flyonui/dist/js/*.js",
     './node_modules/apexcharts/**/*.js', // Include all relevant JS files from ApexCharts
     './node_modules/flyonui/dist/js/helper-apexcharts.js',

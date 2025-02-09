@@ -429,8 +429,12 @@ generateSuggestionBtn.addEventListener('click', async function () {
 })
 
 clearMessages.addEventListener('click', function () {
-    chatMessages.innerHTML = '';
-    localStorage.removeItem('htmlInner')
+    if (confirm('Are you sure you want to clear all messages?')) {
+        chatMessages.innerHTML = '';
+        localStorage.removeItem('htmlInner')
+    } else {
+        return
+    }
 })
 
 async function addMessage(sender = 'user') {
@@ -444,8 +448,9 @@ async function addMessage(sender = 'user') {
         const res = await axios.post('/Suggestions', { data: JSON.parse(localStorage.getItem('expenses')) })
         const data = res.data.response;
         let date = new Date()
-        let time = toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[0] + ':' + toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[1]
-        time += ' ' + (parseInt(time.split(':')[0]) >= 12 ? 'PM' : 'AM')
+        // ? Turning 24 hr to 12 hr AM PM format
+        let time24 = toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[0] + ':' + toISOStringWithTimezone(date).split('T')[1].split('+')[0].split(':')[1]
+        let time = (parseInt(time24.split(':')[0]) > 12 ? parseInt(time24.split(':')[0]) - 12 : parseInt(time24.split(':')[0])) + ':' + time24.split(':')[1] + ' ' + (parseInt(time24.split(':')[0]) >= 12 ? 'PM' : 'AM')
         messageEl.innerHTML = `<div class="text-mainText opacity-50 text-sm my-2"><span class="bg-neutral-600 bg-opacity-30  rounded-full  p-1 px-4 ">${time}</span>
         </div>
          <div>${data}</div>`;

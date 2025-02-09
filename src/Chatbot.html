@@ -22,18 +22,7 @@
     />
 
     <link rel="stylesheet" href="output.css" />
-    <link rel="stylesheet" href="../css/CurrencyStylecss.css" />
-    <style>
-      .chatbox__message--bot {
-        float: left;
-        clear: both;
-      }
-      .chatbox__message--human {
-        float: right;
-        clear: both;
-        margin-right: 2rem;
-      }
-    </style>
+    <link rel="stylesheet" href="../css/chatbot.css" />
   </head>
   <body>
     <!--! Navbar -->
@@ -96,24 +85,9 @@
           id="chatbox"
         >
           <div
-            class="chatbox__messages min-h-[400px] min-w-full rounded-lg m-4 p-4"
+            class="chatbox__messages min-h-[400px] min-w-full rounded-lg m-4 p-4 flex flex-col gap-4 overflow-y-auto"
             id="chatbox__messages"
-          >
-            <div class="chatbox__message chatbox__message--bot">
-              <p
-                class="chatbox__message-text w-auto border border-neutral-600 rounded-md p-4"
-              >
-                Hi! I'm a chatbot. How can I help you today?
-              </p>
-            </div>
-            <div class="chatbox__message chatbox__message--human">
-              <p
-                class="chatbox__message-text w-auto border border-neutral-600 rounded-md p-4"
-              >
-                Hello I am a human input
-              </p>
-            </div>
-          </div>
+          ></div>
           <div
             class="chatbox__input border border-neutral-600 m-4 rounded-md min-h-12 flex items-center"
           >
@@ -134,12 +108,15 @@
       </div>
     </div>
 
-    <script src="./CurrencyConverter.js"></script>
-
     <script src="../js/flyonui/flyonui.js"></script>
     <script src="../js/lodash/lodash.js"></script>
     <script src="../js/apexcharts/dist/apexcharts.js"></script>
     <script src="../js/flatpickr/dist/flatpickr.js"></script>
     <script src="../js/flyonui/dist/js/helper-apexcharts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./chatbot.js" type="module"></script>
   </body>
 </html>
