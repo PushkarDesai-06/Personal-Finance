@@ -106,7 +106,7 @@
           </div>
           <!--? Date  -->
         </div>
-        <div id="expenses" class=" h-[900px] rounded-xl rounded-t-none">
+        <div id="expenses" class=" md:h-[900px] h-[500px] rounded-xl rounded-t-none">
           <div class="flex justify-between items-center p-4 w-[90%] mx-auto">
             <h2 class="text-xl">Expenses</h2>
             <button class="btn btn-sm bg-neutral-600 bg-opacity-30 px-4 py-2 w-auto h-auto" aria-haspopup="dialog" aria-expanded="false" aria-controls="basic-modal" data-overlay="#basic-modal">
@@ -213,23 +213,22 @@
           
           </div>
           <div class=" border-t-neutral-600 border-t mt-4 pt-3">
-            <ul class="flex justify-evenly items-center">
-              <li>
-                <div class="relative inline-flex group scale-[0.7]">
-                <div
-                    class="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
+            <div class="grid grid-cols-2 grid-rows-2 sm:grid-cols-3 sm:grid-rows-1 sm:gap-2 justify-center items-center m-2 ">
+              
+
+                <div class="relative inline-flex group scale-[0.8] h-full row-span-2 row-start-1 w-full">
+                  <div
+                  class="absolute transitiona-all duration-1000 h-full w-full opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt border">
                 </div>
                 <a title="Generate Suggestion"
                 id="generate-suggestion-btn"
-                    class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 active:scale-95"
-                    role="button">Generate
-                </a>
+                class="relative inline-flex w-full items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 active:scale-95 h-full"
+                role="button">Generate
+              </a>
             </div>
-              <li><button class="btn btn-gradient" id="clear-messages"><span class="mr-2"><i class="fa-solid fa-trash"></i></span>Clear</button></li>
-              <li><button class="btn btn-gradient"><i class="fa-solid fa-paper-plane mr-2"></i><a href="Chatbot.html">Chat</a></button></li>
-            </ul>
-          </div>
-          
+            
+                <div class="w-full col-start-2 flex sm:justify-between justify-end items-center "><button class="btn btn-gradient w-full" id="clear-messages"><span class="mr-2"><i class="fa-solid fa-trash"></i></span>Clear</button></div>
+                <div class="flex  col-start-2 sm:col-start-3 row-start-2 sm:row-start-1 sm:justify-between justify-end items-center"><button class="btn btn-gradient w-full "><i class="fa-solid fa-paper-plane mr-2"></i><a href="Chatbot.html">Chat</a></button></div>
         </div>
     </main>
 
