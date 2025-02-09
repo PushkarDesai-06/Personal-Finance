@@ -30,6 +30,12 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
+
+@app.get('/')
+async def root():
+    return {"message": "Welcome to my API :)"}
+
+
 @app.get('/hi')
 async def root():
     return {"message": "Hello World"}
@@ -37,7 +43,7 @@ async def root():
 @app.post('/chat')
 async def chat_with_gemini(chat_data: ChatData):
     
-    prompt = "*DATA REQUIRED*\n" + str(chat_data.data) + "\n*Prompt*\n" + chat_data.message + " DONT use markdown . ONLY use tags. Dont include the <html> tag and ```. wrap it in a div. All expenses are in rupees (INR ₹). Make the use of appropriate tags Use tailwind for styling it. Even if the prompt is not related to expenses, the response should be related to expenses."
+    prompt = "*DATA REQUIRED*\n" + str(chat_data.data) + "\n*Prompt*\n" + chat_data.message + " DONT use markdown . ONLY use tags. Dont include the <html> tag and ```. wrap it in a div. All expenses are in rupees (INR ₹). Make the use of appropriate tags Use inline css for styling, keep the  background transparent. Even if the prompt is not related to expenses, the response should be given."
 
     genai.configure(api_key=api_key)
     try:
