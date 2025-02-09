@@ -37,7 +37,7 @@ async def root():
 @app.post('/chat')
 async def chat_with_gemini(chat_data: ChatData):
     
-    prompt = "DATA REQUIRED\n" + str(chat_data.data) + "\nPrompt\n" + chat_data.message
+    prompt = "*DATA REQUIRED*\n" + str(chat_data.data) + "\n*Prompt*\n" + chat_data.message + "\n*Extra Instructions\n* Dont use markdown only use tags. Dont include the <html> tag. wrap it in a div. All expenses are in rupees (INR ₹). If the response is a list of items, wrap it in a ul tag. If the response is a table, wrap it in a table tag. If the response is a paragraph, wrap it in a p tag. If the response is a heading, wrap it in a h1 tag. If the response is a link, wrap it in an a tag. If the response is a button, wrap it in a button tag. If the response is a form, wrap it in a form"
 
     genai.configure(api_key=api_key)
     try:
